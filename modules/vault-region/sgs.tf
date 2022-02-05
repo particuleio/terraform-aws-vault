@@ -1,4 +1,4 @@
-module "sg_vault" {
+module "sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
   name    = var.name_prefix
@@ -7,9 +7,9 @@ module "sg_vault" {
   ingress_with_self = [
     {
       description = "Vault Cluster"
-      from_port   = 8201
-      to_port     = 8201
-      protocol    = "tcp"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
       self        = true
     },
   ]

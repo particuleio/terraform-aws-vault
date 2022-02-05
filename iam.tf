@@ -64,10 +64,10 @@ data "aws_iam_policy_document" "vault" {
     ]
 
     resources = [
-      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${module.dynamodb_table.dynamodb_table_id}",
-      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${module.dynamodb_table.dynamodb_table_id}/*",
-      "arn:aws:dynamodb:${data.aws_region.secondary.name}:${data.aws_caller_identity.current.account_id}:table/${module.dynamodb_table.dynamodb_table_id}",
-      "arn:aws:dynamodb:${data.aws_region.secondary.name}:${data.aws_caller_identity.current.account_id}:table/${module.dynamodb_table.dynamodb_table_id}/*",
+      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}",
+      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}/*",
+      "arn:aws:dynamodb:${data.aws_region.secondary.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}",
+      "arn:aws:dynamodb:${data.aws_region.secondary.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}/*",
     ]
   }
 

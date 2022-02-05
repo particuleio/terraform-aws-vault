@@ -2,16 +2,13 @@
 # Copyright (c) 2014-2021 Avant, Sean Lingren
 
 ############################
-## Environment #############
+## Global ##################
 ############################
-
-variable "aws_region_secondary" {}
 
 variable "name_prefix" {
   type        = string
   description = "A name to prefix every created resource with"
 }
-
 
 variable "tags" {
   type        = map(string)
@@ -19,116 +16,75 @@ variable "tags" {
   default     = {}
 }
 
+variable "cfssl_version" {
+  default = "1.6.1"
+}
 
-#############################
-### EC2 ##############
-#############################
+variable "vpc_peering_enabled" {
+  default = true
+}
 
-variable "vpc_id" {
+variable "asg_defaults" {
+  type = any
+  default = {
+    desired_capacity                = 3
+    min_size                        = 0
+    max_size                        = 3
+    key_name                        = null
+    disk_size                       = 20
+    instance_type                   = "t3a.micro"
+    vpc_zone_identifier             = []
+    tags_as_map                     = {}
+    tags                            = {}
+    asg_associate_public_ip_address = false
+  }
+}
+
+variable "nlb_defaults" {
+  type = any
+  default = {
+    internal        = false
+    listener_port   = 443
+    subnets         = []
+    ip_address_type = "dualstack"
+  }
+}
+
+variable "vault_api_address" {
   type        = string
-  description = "The ID of the VPC to use"
+  description = "The address that vault will be accessible at"
 }
 
-variable "asg_desired_capacity" {
-  type    = number
-  default = 3
-}
-
-variable "asg_min_size" {
-  type    = number
-  default = 3
-}
-
-variable "asg_max_size" {
-  type    = number
-  default = 3
-}
-
-variable "asg_key_name" {
-  default = null
-}
-
-variable "asg_vpc_zone_identifier" {
-  type = list(any)
-}
-
-variable "asg_disk_size" {
-  type    = number
-  default = 20
-}
-
-variable "asg_tags" {
-  type    = list(any)
-  default = []
-}
-
-variable "asg_tags_as_map" {
-  type    = map(string)
-  default = {}
-}
-
-variable "asg_instance_type" {
-  default = "t3a.micro"
-}
-
-variable "asg_ami_id" {
-  default = "ami-073642a01018de26c"
-}
-
-#############################
-### Networking ##############
-#############################
-variable "vault_dns_address" {
+variable "vault_dns_domain" {
   type        = string
   description = "The DNS address that vault will be accessible at"
 }
 
-#variable "alb_subnets" {
-#  type        = list(string)
-#  description = "A list of subnets to launch the ALB in"
-#}
-#
-#variable "ec2_subnets" {
-#  type        = list(string)
-#  description = "A list of subnets to launch the EC2 instances in"
-#}
-#
-#############################
-### EC2 #####################
-#############################
-#variable "ami_id" {
-#  type        = string
-#  description = "The ID of the AMI to use to launch Vault"
-#}
-#
-#variable "instance_type" {
-#  type        = string
-#  description = "The type of instance to launch vault on"
-#}
-#
-#variable "ssh_key_name" {
-#  type        = string
-#  description = "The name of the ssh key to use for the EC2 instance"
-#}
-#
-#variable "asg_min_size" {
-#  type        = string
-#  description = "Minimum number of instances in the ASG"
-#}
-#
-#variable "asg_max_size" {
-#  type        = string
-#  description = "Maximum number of instances in the ASG"
-#}
-#
-#variable "asg_desired_capacity" {
-#  type        = string
-#  description = "Desired number of instances in the ASG"
-#}
-#
-#############################
-### OS ######################
-#############################
+variable "vault_pki_ca_config" {
+  type    = any
+  default = null
+}
+
+variable "vault_pki_client_certs" {
+  type = any
+  default = {
+    "default" = {
+      usages = [
+        "client_auth",
+        "key_encipherement",
+        "digital_signature",
+      ]
+      subject = {
+        common_name = "default-vault-client"
+
+      }
+    }
+  }
+}
+
+variable "vault_version" {
+  default = "1.9.3"
+}
 
 variable "vault_cert_dir" {
   type        = string
@@ -166,30 +122,78 @@ variable "vault_tls_client_ca_pem" {
   default = ""
 }
 
+variable "vault_routing_policy" {
+  default = "all"
+  validation {
+    condition     = contains(["leader_only", "all"], var.vault_routing_policy)
+    error_message = "Values can only be \"leader_only\" or \"all\"."
+  }
+}
+
+variable "vault_tls_require_and_verify_client_cert" {
+  default = false
+}
 
 #############################
-### DynamoDB ################
+### VPC #####################
 #############################
-#variable "dynamodb_table_name" {
-#  type        = string
-#  description = "The name of the dynamodb table that vault will create to coordinate HA"
-#}
-#
-############################
+
+variable "vpc_id" {
+  type        = string
+  description = "The ID of the VPC to use"
+}
+
+variable "vpc_secondary_id" {
+  type        = string
+  description = "The ID of the VPC to use"
+}
+
+#############################
+### EC2 #####################
+#############################
+
+variable "asg" {
+  type = any
+}
+
+variable "asg_secondary" {
+  type = any
+}
+
+#############################
+### NLB #####################
+#############################
+
+variable "nlbs" {
+  type = any
+  default = {
+    "external" = {
+    }
+    "internal" = {
+      internal = true
+    }
+  }
+}
+
+variable "nlbs_secondary" {
+  type = any
+  default = {
+    "external" = {
+    }
+    "internal" = {
+      internal = true
+    }
+  }
+}
+
+#############################
 ### DNS #####################
 #############################
-#variable "route53_enabled" {
-#  type        = string
-#  description = "Creates Route53 DNS entries for Vault automatically"
-#  default     = false
-#}
-#
-#variable "zone_id" {
-#  type        = string
-#  description = "Zone ID for domain"
-#}
-#
-#variable "secrets" {
-#  type    = any
-#  default = {}
-#}
+
+variable "route53_zone_name" {
+  default = ""
+}
+
+variable "route53_private_zone_name" {
+  default = ""
+}

@@ -1,34 +1,27 @@
 module "secrets" {
-  #source  = "particuleio/secretsmanager/aws"
-  #version = "~> 1"
-  source = "/home/klefevre/git/particuleio/terraform-aws-secretsmanager"
+  source  = "particuleio/secretsmanager/aws"
+  version = "~> 1.0"
+
   secrets = {
 
     "${var.name_prefix}/tls/ca_pem" = {
-      content = var.vault_tls_client_ca_pem
+      content = module.pki.ca.cert.cert_pem
       replicas = [
         {
-          region = var.aws_region_secondary
+          region = data.aws_region.secondary.name
         }
       ]
+      force_overwrite_replica_secret = true
     }
 
-    "${var.name_prefix}/tls/cert_pem" = {
-      content = var.vault_tls_cert_pem
+    "${var.name_prefix}/tls/ca_key" = {
+      content = module.pki.ca.private_key.private_key_pem
       replicas = [
         {
-          region = var.aws_region_secondary
+          region = data.aws_region.secondary.name
         }
       ]
-    }
-
-    "${var.name_prefix}/tls/key_pem" = {
-      content = var.vault_tls_key_pem
-      replicas = [
-        {
-          region = var.aws_region_secondary
-        }
-      ]
+      force_overwrite_replica_secret = true
     }
   }
 }

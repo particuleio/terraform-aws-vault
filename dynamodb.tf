@@ -1,31 +1,35 @@
-module "dynamodb_table" {
-  source  = "terraform-aws-modules/dynamodb-table/aws"
-  version = "~> 1"
+resource "aws_dynamodb_table" "dynamodb_table" {
+  name = var.name_prefix
 
-  name           = var.name_prefix
-  hash_key       = "Path"
-  range_key      = "Key"
-  stream_enabled = true
+  billing_mode     = "PAY_PER_REQUEST"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
 
-  attributes = [
-    {
-      name = "Path"
-      type = "S"
-    },
-    {
-      name = "Key"
-      type = "S"
-    }
-  ]
+  hash_key  = "Path"
+  range_key = "Key"
 
-  replica_regions = [
-    {
-      region_name = var.aws_region_secondary
-    }
-  ]
+  point_in_time_recovery {
+    enabled = true
+  }
 
-  server_side_encryption_enabled = true
-  point_in_time_recovery_enabled = true
+  server_side_encryption {
+    enabled = true
+  }
+
+  attribute {
+    name = "Path"
+    type = "S"
+  }
+
+  attribute {
+    name = "Key"
+    type = "S"
+  }
+
+  replica {
+    region_name = data.aws_region.secondary.name
+  }
 
   tags = var.tags
+
 }
