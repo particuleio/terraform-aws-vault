@@ -55,20 +55,20 @@ resource "aws_vpc_peering_connection_options" "accepter" {
 
 # Create routes from requestor to acceptor
 resource "aws_route" "requestor" {
-  count                     = var.vpc_peering_enabled ? length(distinct(sort(data.aws_route_tables.vpc.0.ids))) * length(data.aws_vpc.vpc_secondary.0.cidr_block_associations) : 0
-  route_table_id            = element(distinct(sort(data.aws_route_tables.vpc.0.ids)), ceil(count.index / length(data.aws_vpc.vpc_secondary.0.cidr_block_associations)))
-  destination_cidr_block    = data.aws_vpc.vpc_secondary.0.cidr_block_associations[count.index % length(data.aws_vpc.vpc_secondary.0.cidr_block_associations)]["cidr_block"]
-  vpc_peering_connection_id = join("", aws_vpc_peering_connection.vault.*.id)
+  count                     = var.vpc_peering_enabled ? length(data.aws_route_tables.vpc.0.ids) : 0
+  route_table_id            = tolist(data.aws_route_tables.vpc.0.ids)[count.index]
+  destination_cidr_block    = data.aws_vpc.vpc_secondary.0.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.vault.0.id
   depends_on                = [data.aws_route_tables.vpc, aws_vpc_peering_connection.vault]
 }
 
 # Create routes from acceptor to requestor
 resource "aws_route" "acceptor" {
   provider                  = aws.secondary
-  count                     = var.vpc_peering_enabled ? length(distinct(sort(data.aws_route_tables.vpc_secondary.0.ids))) * length(data.aws_vpc.vpc.0.cidr_block_associations) : 0
-  route_table_id            = element(distinct(sort(data.aws_route_tables.vpc_secondary.0.ids)), ceil(count.index / length(data.aws_vpc.vpc.0.cidr_block_associations)))
-  destination_cidr_block    = data.aws_vpc.vpc.0.cidr_block_associations[count.index % length(data.aws_vpc.vpc.0.cidr_block_associations)]["cidr_block"]
-  vpc_peering_connection_id = join("", aws_vpc_peering_connection.vault.*.id)
+  count                     = var.vpc_peering_enabled ? length(data.aws_route_tables.vpc_secondary.0.ids) : 0
+  route_table_id            = tolist(data.aws_route_tables.vpc_secondary.0.ids)[count.index]
+  destination_cidr_block    = data.aws_vpc.vpc.0.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.vault.0.id
   depends_on                = [data.aws_route_tables.vpc_secondary, aws_vpc_peering_connection.vault]
 }
 
