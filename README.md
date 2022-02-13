@@ -83,8 +83,8 @@ Instances have SSM enable by default, no need for SSH keys.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_pki"></a> [pki](#module\_pki) | particuleio/pki/tls | ~> 1.1 |
-| <a name="module_primary"></a> [primary](#module\_primary) | ./modules/vault-region |  |
-| <a name="module_secondary"></a> [secondary](#module\_secondary) | ./modules/vault-region |  |
+| <a name="module_primary"></a> [primary](#module\_primary) | ./modules/vault-region | n/a |
+| <a name="module_secondary"></a> [secondary](#module\_secondary) | ./modules/vault-region | n/a |
 | <a name="module_secrets"></a> [secrets](#module\_secrets) | particuleio/secretsmanager/aws | ~> 1.0 |
 
 ## Resources
