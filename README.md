@@ -52,7 +52,11 @@ Support for private and public hosted zone for split horizon DNS. Register autom
 ### VPC
 
 VPC peering between the 2 provided VPC is enabled by default, if VPCs are
-already peered it can be disable with `vpc_peering_enabled=false`
+already peered it can be disable with `vpc_peering_enabled=false`.
+
+:warning: there is a dependency issue when creating everything from scratch in
+the example folder. `vpc_peering_enabled` should be turn to true only after the
+VPC have been created, or use the `-target` feature.
 
 ### AMI
 

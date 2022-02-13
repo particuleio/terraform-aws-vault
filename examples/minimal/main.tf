@@ -178,7 +178,7 @@ module "vault" {
 
   vpc_id              = module.vpc_primary.vpc_id
   vpc_secondary_id    = module.vpc_secondary.vpc_id
-  vpc_peering_enabled = false
+  vpc_peering_enabled = true
 
   asg = {
     vpc_zone_identifier = module.vpc_primary.private_subnets
