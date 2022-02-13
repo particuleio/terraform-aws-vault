@@ -154,9 +154,6 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_vault_pki_ca_config"></a> [vault\_pki\_ca\_config](#input\_vault\_pki\_ca\_config) | n/a | `any` | `null` | no |
 | <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
 | <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
-| <a name="input_vault_tls_cert_pem"></a> [vault\_tls\_cert\_pem](#input\_vault\_tls\_cert\_pem) | n/a | `string` | `""` | no |
-| <a name="input_vault_tls_client_ca_pem"></a> [vault\_tls\_client\_ca\_pem](#input\_vault\_tls\_client\_ca\_pem) | n/a | `string` | `""` | no |
-| <a name="input_vault_tls_key_pem"></a> [vault\_tls\_key\_pem](#input\_vault\_tls\_key\_pem) | n/a | `string` | `""` | no |
 | <a name="input_vault_tls_require_and_verify_client_cert"></a> [vault\_tls\_require\_and\_verify\_client\_cert](#input\_vault\_tls\_require\_and\_verify\_client\_cert) | n/a | `bool` | `false` | no |
 | <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.9.3"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to use | `string` | n/a | yes |

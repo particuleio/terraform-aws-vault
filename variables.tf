@@ -110,18 +110,6 @@ variable "vault_additional_userdata" {
   default     = ""
 }
 
-variable "vault_tls_key_pem" {
-  default = ""
-}
-
-variable "vault_tls_cert_pem" {
-  default = ""
-}
-
-variable "vault_tls_client_ca_pem" {
-  default = ""
-}
-
 variable "vault_routing_policy" {
   default = "all"
   validation {
