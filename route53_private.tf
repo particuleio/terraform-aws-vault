@@ -2,7 +2,6 @@ data "aws_route53_zone" "private" {
   count        = var.route53_private_zone_name != "" ? 1 : 0
   name         = var.route53_private_zone_name
   private_zone = true
-
 }
 
 resource "aws_route53_record" "private_a" {

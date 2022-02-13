@@ -80,8 +80,8 @@ resource "aws_security_group_rule" "peering" {
   to_port           = 8201
   protocol          = "tcp"
   security_group_id = module.primary.sg.security_group_id
-  cidr_blocks       = [data.aws_vpc.vpc_secondary[0].cidr_block]
-  ipv6_cidr_blocks  = [data.aws_vpc.vpc_secondary[0].ipv6_cidr_block]
+  cidr_blocks       = compact([data.aws_vpc.vpc_secondary[0].cidr_block])
+  ipv6_cidr_blocks  = compact([data.aws_vpc.vpc_secondary[0].ipv6_cidr_block])
 }
 
 resource "aws_security_group_rule" "peering_secondary" {
@@ -93,6 +93,6 @@ resource "aws_security_group_rule" "peering_secondary" {
   to_port           = 8201
   protocol          = "tcp"
   security_group_id = module.secondary.sg.security_group_id
-  cidr_blocks       = [data.aws_vpc.vpc[0].cidr_block]
-  ipv6_cidr_blocks  = [data.aws_vpc.vpc[0].ipv6_cidr_block]
+  cidr_blocks       = compact([data.aws_vpc.vpc[0].cidr_block])
+  ipv6_cidr_blocks  = compact([data.aws_vpc.vpc[0].ipv6_cidr_block])
 }
