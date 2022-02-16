@@ -86,7 +86,7 @@ Instances have SSM enable by default, no need for SSH keys.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_pki"></a> [pki](#module\_pki) | particuleio/pki/tls | ~> 1.1 |
+| <a name="module_pki"></a> [pki](#module\_pki) | particuleio/pki/tls | ~> 1.0 |
 | <a name="module_primary"></a> [primary](#module\_primary) | ./modules/vault-region | n/a |
 | <a name="module_secondary"></a> [secondary](#module\_secondary) | ./modules/vault-region | n/a |
 | <a name="module_secrets"></a> [secrets](#module\_secrets) | particuleio/secretsmanager/aws | ~> 1.0 |
@@ -155,7 +155,7 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_vault_cert_dir"></a> [vault\_cert\_dir](#input\_vault\_cert\_dir) | The directory on the OS to store Vault certificates | `string` | `"/usr/local/etc/vault/tls"` | no |
 | <a name="input_vault_config_dir"></a> [vault\_config\_dir](#input\_vault\_config\_dir) | The directory on the OS to store the Vault configuration | `string` | `"/usr/local/etc/vault"` | no |
 | <a name="input_vault_dns_domain"></a> [vault\_dns\_domain](#input\_vault\_dns\_domain) | The DNS address that vault will be accessible at | `string` | n/a | yes |
-| <a name="input_vault_pki_ca_config"></a> [vault\_pki\_ca\_config](#input\_vault\_pki\_ca\_config) | n/a | `any` | `null` | no |
+| <a name="input_vault_pki_ca_config"></a> [vault\_pki\_ca\_config](#input\_vault\_pki\_ca\_config) | n/a | `any` | `{}` | no |
 | <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
 | <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
 | <a name="input_vault_tls_require_and_verify_client_cert"></a> [vault\_tls\_require\_and\_verify\_client\_cert](#input\_vault\_tls\_require\_and\_verify\_client\_cert) | n/a | `bool` | `false` | no |

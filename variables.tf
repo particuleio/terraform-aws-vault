@@ -62,7 +62,7 @@ variable "vault_dns_domain" {
 
 variable "vault_pki_ca_config" {
   type    = any
-  default = null
+  default = {}
 }
 
 variable "vault_pki_client_certs" {
