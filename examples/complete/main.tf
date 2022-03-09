@@ -51,7 +51,7 @@ module "vpc_primary" {
 
 module "vpc_endpoints_primary" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "3.0"
+  version = "~>3.0"
   vpc_id  = module.vpc_primary.vpc_id
   endpoints = {
     s3 = {
@@ -130,7 +130,7 @@ module "vpc_endpoints_secondary" {
     aws = aws.secondary
   }
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "3.0"
+  version = "~>3.0"
   vpc_id  = module.vpc_secondary.vpc_id
   endpoints = {
     s3 = {
