@@ -17,18 +17,16 @@ module "asg" {
   wait_for_capacity_timeout = try(var.asg.wait_for_capacity_timeout, 0)
   termination_policies      = try(var.asg.termination_policies, ["OldestInstance"])
 
-  use_lt                 = true
-  create_lt              = true
-  lt_name                = try(var.asg.name_prefix, var.name_prefix)
-  update_default_version = true
+  launch_template_name   = try(var.asg.name_prefix, var.name_prefix)
+  update_default_version = try(var.asg.update_default_version, true)
 
-  instance_refresh = {
+  instance_refresh = try(var.asg.instance_refresh, {
     strategy = "Rolling"
     preferences = {
       min_healthy_percentage = 66
     }
     triggers = ["tag"]
-  }
+  })
 
   user_data_base64 = base64encode(data.template_file.userdata.rendered)
 
@@ -36,8 +34,8 @@ module "asg" {
 
   image_id          = try(var.asg.ami_id, data.aws_ami.vault.id)
   instance_type     = try(var.asg.instance_type, "t3a.micro")
-  ebs_optimized     = true
-  enable_monitoring = true
+  ebs_optimized     = try(var.asg.ebs_optimized, true)
+  enable_monitoring = try(var.asg.enable_monitoring, true)
 
   network_interfaces = [
     {
@@ -59,7 +57,7 @@ module "asg" {
     }
   ]
 
-  enabled_metrics = [
+  enabled_metrics = try(var.asg.enabled_metrics, [
     "GroupMinSize",
     "GroupMaxSize",
     "GroupDesiredCapacity",
@@ -68,9 +66,10 @@ module "asg" {
     "GroupStandbyInstances",
     "GroupTerminatingInstances",
     "GroupTotalInstances",
-  ]
+  ])
 
-  tags = [try(var.asg.tags, {})]
-
-  tags_as_map = try(var.asg.tags_as_map, {})
+  tags = merge(
+    var.tags,
+    try(var.asg.tags, {})
+  )
 }
