@@ -72,15 +72,15 @@ Instances have SSM enable by default, no need for SSH keys.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0 |
-| <a name="provider_aws.secondary"></a> [aws.secondary](#provider\_aws.secondary) | >= 3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.7 |
+| <a name="provider_aws.secondary"></a> [aws.secondary](#provider\_aws.secondary) | >= 4.7 |
 
 ## Modules
 

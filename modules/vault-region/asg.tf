@@ -1,6 +1,6 @@
 module "asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "~> 5"
+  version = ">= 6.2"
 
   name = try(var.asg.name_prefix, var.name_prefix)
 
@@ -28,7 +28,7 @@ module "asg" {
     triggers = ["tag"]
   })
 
-  user_data_base64 = base64encode(data.template_file.userdata.rendered)
+  user_data = base64encode(data.template_file.userdata.rendered)
 
   iam_instance_profile_arn = try(var.asg.iam_instance_profile_arn, var.iam_instance_profile_arn)
 
