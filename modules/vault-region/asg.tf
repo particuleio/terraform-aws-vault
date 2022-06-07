@@ -28,7 +28,7 @@ module "asg" {
     triggers = ["tag"]
   })
 
-  user_data = base64encode(data.template_file.userdata.rendered)
+  user_data = data.cloudinit_config.userdata.rendered
 
   iam_instance_profile_arn = try(var.asg.iam_instance_profile_arn, var.iam_instance_profile_arn)
 
