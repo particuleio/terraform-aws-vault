@@ -47,4 +47,3 @@ data "cloudinit_config" "userdata" {
     )
   }
 }
-
