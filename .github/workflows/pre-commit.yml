@@ -18,7 +18,7 @@ jobs:
       directories: ${{ steps.dirs.outputs.directories }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Get root directories
         id: dirs
@@ -33,7 +33,7 @@ jobs:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: avoid issue TF issue 28490
         uses: bendrucker/terraform-configuration-aliases-action@v1
@@ -66,10 +66,13 @@ jobs:
     needs: collectInputs
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
+
+      - name: avoid issue TF issue 28490
+        uses: bendrucker/terraform-configuration-aliases-action@v1
 
       - name: Terraform min/max versions
         id: minMax
