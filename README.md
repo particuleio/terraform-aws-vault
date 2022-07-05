@@ -160,7 +160,7 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
 | <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
 | <a name="input_vault_tls_require_and_verify_client_cert"></a> [vault\_tls\_require\_and\_verify\_client\_cert](#input\_vault\_tls\_require\_and\_verify\_client\_cert) | n/a | `bool` | `false` | no |
-| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.9.4"` | no |
+| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.11.0"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to use | `string` | n/a | yes |
 | <a name="input_vpc_peering_enabled"></a> [vpc\_peering\_enabled](#input\_vpc\_peering\_enabled) | n/a | `bool` | `true` | no |
 | <a name="input_vpc_secondary_id"></a> [vpc\_secondary\_id](#input\_vpc\_secondary\_id) | The ID of the VPC to use | `string` | n/a | yes |

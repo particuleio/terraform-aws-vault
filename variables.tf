@@ -83,7 +83,7 @@ variable "vault_pki_client_certs" {
 }
 
 variable "vault_version" {
-  default = "1.9.4"
+  default = "1.11.0"
 }
 
 variable "vault_cert_dir" {
