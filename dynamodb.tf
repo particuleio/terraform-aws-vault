@@ -27,7 +27,8 @@ resource "aws_dynamodb_table" "dynamodb_table" {
   }
 
   replica {
-    region_name = data.aws_region.secondary.name
+    region_name            = data.aws_region.secondary.name
+    point_in_time_recovery = true
   }
 
   tags = var.tags
