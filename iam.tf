@@ -44,6 +44,19 @@ data "aws_iam_policy_document" "vault" {
     effect = "Allow"
 
     actions = [
+      "ec2:DescribeInstances",
+      "iam:GetInstanceProfile",
+      "iam:GetUser",
+      "iam:GetRole"
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
       "dynamodb:DescribeLimits",
       "dynamodb:DescribeTimeToLive",
       "dynamodb:ListTagsOfResource",
