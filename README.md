@@ -86,7 +86,7 @@ Instances have SSM enable by default, no need for SSH keys.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_pki"></a> [pki](#module\_pki) | particuleio/pki/tls | ~> 1.0 |
+| <a name="module_pki"></a> [pki](#module\_pki) | particuleio/pki/tls | ~> 2.0 |
 | <a name="module_primary"></a> [primary](#module\_primary) | ./modules/vault-region | n/a |
 | <a name="module_secondary"></a> [secondary](#module\_secondary) | ./modules/vault-region | n/a |
 | <a name="module_secrets"></a> [secrets](#module\_secrets) | particuleio/secretsmanager/aws | >= 1.2 |
@@ -96,7 +96,6 @@ Instances have SSM enable by default, no need for SSH keys.
 | Name | Type |
 |------|------|
 | [aws_dynamodb_table.dynamodb_table](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table) | resource |
-| [aws_dynamodb_tag.replica](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_tag) | resource |
 | [aws_iam_instance_profile.vault](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
 | [aws_iam_policy.vault](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.vault](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
