@@ -29,18 +29,9 @@ resource "aws_dynamodb_table" "dynamodb_table" {
   replica {
     region_name            = data.aws_region.secondary.name
     point_in_time_recovery = true
+    propagate_tags         = true
   }
 
   tags = var.tags
 
-}
-
-resource "aws_dynamodb_tag" "replica" {
-  provider = aws.secondary
-
-  for_each = var.tags
-
-  resource_arn = replace(aws_dynamodb_table.dynamodb_table.arn, data.aws_region.current.name, data.aws_region.secondary.name)
-  key          = each.key
-  value        = each.value
 }
