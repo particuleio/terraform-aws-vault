@@ -4,18 +4,18 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+systemctl start amazon-ssm-agent.service
+systemctl enable amazon-ssm-agent.service
+
 # Set Bin directory
 BIN_DIR=/usr/local/bin
 
 # Get the Instance ID
-INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id)
 
 # Set the Hostname
 hostnamectl set-hostname "${ name_prefix }-$INSTANCE_ID"
-systemctl restart rsyslog.service
-
-# Configure SSM Agent
-systemctl start amazon-ssm-agent
 
 # Download cfssl
 curl -sL https://github.com/cloudflare/cfssl/releases/download/v${ cfssl_version }/cfssl_${ cfssl_version }_linux_amd64 -o $BIN_DIR/cfssl
@@ -24,8 +24,8 @@ chmod +x $BIN_DIR/cfssl
 chmod +x $BIN_DIR/cfssljson
 
 # Get Metadata
-MYIP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
-MYDNS=$(curl http://169.254.169.254/latest/meta-data/local-hostname)
+MYIP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/local-ipv4)
+MYDNS=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/local-hostname)
 
 cat <<EOF > ${ vault_config_dir }/config.hcl
 cluster_name      = "${ name_prefix }"

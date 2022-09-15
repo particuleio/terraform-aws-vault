@@ -21,3 +21,7 @@ output "primary" {
 output "secondary" {
   value = module.primary
 }
+
+output "vault_dns_domain" {
+  value = var.vault_dns_domain
+}
