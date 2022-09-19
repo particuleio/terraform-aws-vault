@@ -141,7 +141,7 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_asg"></a> [asg](#input\_asg) | n/a | `any` | n/a | yes |
 | <a name="input_asg_defaults"></a> [asg\_defaults](#input\_asg\_defaults) | n/a | `any` | <pre>{<br>  "asg_associate_public_ip_address": false,<br>  "desired_capacity": 3,<br>  "disk_size": 20,<br>  "instance_type": "t3a.micro",<br>  "key_name": null,<br>  "max_size": 3,<br>  "min_size": 0,<br>  "tags": {},<br>  "tags_as_map": {},<br>  "vpc_zone_identifier": []<br>}</pre> | no |
 | <a name="input_asg_secondary"></a> [asg\_secondary](#input\_asg\_secondary) | n/a | `any` | n/a | yes |
-| <a name="input_cfssl_version"></a> [cfssl\_version](#input\_cfssl\_version) | n/a | `string` | `"1.6.1"` | no |
+| <a name="input_cfssl_version"></a> [cfssl\_version](#input\_cfssl\_version) | n/a | `string` | `"1.6.2"` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | A name to prefix every created resource with | `string` | n/a | yes |
 | <a name="input_nlb_defaults"></a> [nlb\_defaults](#input\_nlb\_defaults) | n/a | `any` | <pre>{<br>  "internal": false,<br>  "ip_address_type": "dualstack",<br>  "listener_port": 443,<br>  "subnets": []<br>}</pre> | no |
 | <a name="input_nlbs"></a> [nlbs](#input\_nlbs) | n/a | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
@@ -159,7 +159,7 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
 | <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
 | <a name="input_vault_tls_require_and_verify_client_cert"></a> [vault\_tls\_require\_and\_verify\_client\_cert](#input\_vault\_tls\_require\_and\_verify\_client\_cert) | n/a | `bool` | `false` | no |
-| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.11.1"` | no |
+| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.11.3"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to use | `string` | n/a | yes |
 | <a name="input_vpc_peering_enabled"></a> [vpc\_peering\_enabled](#input\_vpc\_peering\_enabled) | n/a | `bool` | `true` | no |
 | <a name="input_vpc_secondary_id"></a> [vpc\_secondary\_id](#input\_vpc\_secondary\_id) | The ID of the VPC to use | `string` | n/a | yes |
@@ -172,5 +172,6 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="output_primary"></a> [primary](#output\_primary) | n/a |
 | <a name="output_secondary"></a> [secondary](#output\_secondary) | n/a |
 | <a name="output_secrets"></a> [secrets](#output\_secrets) | n/a |
+| <a name="output_vault_dns_domain"></a> [vault\_dns\_domain](#output\_vault\_dns\_domain) | n/a |
 | <a name="output_vault_pki"></a> [vault\_pki](#output\_vault\_pki) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

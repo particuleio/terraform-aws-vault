@@ -37,6 +37,12 @@ module "asg" {
   ebs_optimized     = try(var.asg.ebs_optimized, true)
   enable_monitoring = try(var.asg.enable_monitoring, true)
 
+  metadata_options = {
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 1
+  }
+
   network_interfaces = [
     {
       security_groups             = [module.sg.security_group_id]

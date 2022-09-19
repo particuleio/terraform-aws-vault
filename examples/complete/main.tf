@@ -311,3 +311,24 @@ module "vault" {
     }
   }
 }
+
+output "vpc_primary" {
+  value = module.vpc_primary
+}
+
+output "vpc_endpoints_primary" {
+  value = module.vpc_primary
+}
+
+output "vpc_secondary" {
+  value = module.vpc_primary
+}
+
+output "vpc_endpoints_secondary" {
+  value = module.vpc_primary
+}
+
+output "vault" {
+  value     = module.vault
+  sensitive = true
+}

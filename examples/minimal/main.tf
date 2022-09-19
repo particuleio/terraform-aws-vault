@@ -171,7 +171,7 @@ module "vault" {
   vault_dns_domain                         = "vault-demo.particule.tech"
   vault_api_address                        = "https://vault-demo.particule.tech"
   vault_routing_policy                     = "all"
-  vault_tls_require_and_verify_client_cert = true
+  vault_tls_require_and_verify_client_cert = false
 
   route53_zone_name         = "particule.tech"
   route53_private_zone_name = ""
@@ -179,6 +179,7 @@ module "vault" {
   vpc_id              = module.vpc_primary.vpc_id
   vpc_secondary_id    = module.vpc_secondary.vpc_id
   vpc_peering_enabled = true
+
 
   asg = {
     vpc_zone_identifier = module.vpc_primary.private_subnets
@@ -208,4 +209,25 @@ module "vault" {
       internal = true
     }
   }
+}
+
+output "vpc_primary" {
+  value = module.vpc_primary
+}
+
+output "vpc_endpoints_primary" {
+  value = module.vpc_primary
+}
+
+output "vpc_secondary" {
+  value = module.vpc_primary
+}
+
+output "vpc_endpoints_secondary" {
+  value = module.vpc_primary
+}
+
+output "vault" {
+  value     = module.vault
+  sensitive = true
 }

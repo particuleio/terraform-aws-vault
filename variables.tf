@@ -17,7 +17,7 @@ variable "tags" {
 }
 
 variable "cfssl_version" {
-  default = "1.6.1"
+  default = "1.6.2"
 }
 
 variable "vpc_peering_enabled" {
@@ -83,7 +83,7 @@ variable "vault_pki_client_certs" {
 }
 
 variable "vault_version" {
-  default = "1.11.1"
+  default = "1.11.3"
 }
 
 variable "vault_cert_dir" {
