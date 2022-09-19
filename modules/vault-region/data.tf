@@ -4,7 +4,7 @@ data "aws_caller_identity" "current" {}
 
 data "aws_ami" "vault" {
   most_recent = true
-  name_regex  = "vault-${var.vault_version}-*"
+  name_regex  = "vault-${var.vault_version}-al2022-*"
   owners      = ["886701765425"]
 
   filter {
