@@ -26,7 +26,7 @@ variable "tags" {
 }
 
 variable "vault_version" {
-  default = "1.9.3"
+  default = "1.11.3"
 }
 
 variable "vault_cert_dir" {
@@ -75,6 +75,16 @@ variable "vault_routing_policy" {
 
 variable "vault_tls_require_and_verify_client_cert" {
   default = false
+}
+
+variable "vault_max_lease_ttl" {
+  default = "192h"
+  type    = string
+}
+
+variable "vault_default_lease_ttl" {
+  default = "192h"
+  type    = string
 }
 
 variable "vpc_id" {

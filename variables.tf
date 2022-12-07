@@ -122,6 +122,16 @@ variable "vault_tls_require_and_verify_client_cert" {
   default = false
 }
 
+variable "vault_max_lease_ttl" {
+  default = "192h"
+  type    = string
+}
+
+variable "vault_default_lease_ttl" {
+  default = "192h"
+  type    = string
+}
+
 #############################
 ### VPC #####################
 #############################

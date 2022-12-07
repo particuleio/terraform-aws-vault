@@ -29,8 +29,8 @@ MYDNS=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest
 
 cat <<EOF > ${ vault_config_dir }/config.hcl
 cluster_name      = "${ name_prefix }"
-max_lease_ttl     = "192h" # One week
-default_lease_ttl = "192h" # One week
+max_lease_ttl     = "${ vault_max_lease_ttl }"
+default_lease_ttl = "${ vault_default_lease_ttl }"
 ui                = "true"
 
 api_addr      = "${ vault_api_address }"
