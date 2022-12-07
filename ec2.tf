@@ -24,6 +24,8 @@ module "primary" {
   vault_api_address                        = var.vault_api_address
   vault_routing_policy                     = var.vault_routing_policy
   vault_tls_require_and_verify_client_cert = var.vault_tls_require_and_verify_client_cert
+  vault_max_lease_ttl                      = var.vault_max_lease_ttl
+  vault_default_lease_ttl                  = var.vault_default_lease_ttl
 
   tags = var.tags
 }
@@ -57,6 +59,8 @@ module "secondary" {
   vault_api_address                        = var.vault_api_address
   vault_routing_policy                     = var.vault_routing_policy
   vault_tls_require_and_verify_client_cert = var.vault_tls_require_and_verify_client_cert
+  vault_max_lease_ttl                      = var.vault_max_lease_ttl
+  vault_default_lease_ttl                  = var.vault_default_lease_ttl
 
   tags = var.tags
 }

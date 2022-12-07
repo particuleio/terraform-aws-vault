@@ -43,6 +43,8 @@ data "cloudinit_config" "userdata" {
         vault_additional_config                  = var.vault_additional_config
         vault_tls_require_and_verify_client_cert = var.vault_tls_require_and_verify_client_cert
         cfssl_version                            = var.cfssl_version
+        vault_max_lease_ttl                      = var.vault_max_lease_ttl
+        vault_default_lease_ttl                  = var.vault_default_lease_ttl
       }
     )
   }
