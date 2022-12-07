@@ -154,7 +154,9 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_vault_api_address"></a> [vault\_api\_address](#input\_vault\_api\_address) | The address that vault will be accessible at | `string` | n/a | yes |
 | <a name="input_vault_cert_dir"></a> [vault\_cert\_dir](#input\_vault\_cert\_dir) | The directory on the OS to store Vault certificates | `string` | `"/usr/local/etc/vault/tls"` | no |
 | <a name="input_vault_config_dir"></a> [vault\_config\_dir](#input\_vault\_config\_dir) | The directory on the OS to store the Vault configuration | `string` | `"/usr/local/etc/vault"` | no |
+| <a name="input_vault_default_lease_ttl"></a> [vault\_default\_lease\_ttl](#input\_vault\_default\_lease\_ttl) | n/a | `string` | `"192h"` | no |
 | <a name="input_vault_dns_domain"></a> [vault\_dns\_domain](#input\_vault\_dns\_domain) | The DNS address that vault will be accessible at | `string` | n/a | yes |
+| <a name="input_vault_max_lease_ttl"></a> [vault\_max\_lease\_ttl](#input\_vault\_max\_lease\_ttl) | n/a | `string` | `"192h"` | no |
 | <a name="input_vault_pki_ca_config"></a> [vault\_pki\_ca\_config](#input\_vault\_pki\_ca\_config) | n/a | `any` | `{}` | no |
 | <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
 | <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
