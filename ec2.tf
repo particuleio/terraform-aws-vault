@@ -26,6 +26,7 @@ module "primary" {
   vault_tls_require_and_verify_client_cert = var.vault_tls_require_and_verify_client_cert
   vault_max_lease_ttl                      = var.vault_max_lease_ttl
   vault_default_lease_ttl                  = var.vault_default_lease_ttl
+  vault_prometheus_retention_time          = var.vault_prometheus_retention_time
 
   tags = var.tags
 }
@@ -61,6 +62,7 @@ module "secondary" {
   vault_tls_require_and_verify_client_cert = var.vault_tls_require_and_verify_client_cert
   vault_max_lease_ttl                      = var.vault_max_lease_ttl
   vault_default_lease_ttl                  = var.vault_default_lease_ttl
+  vault_prometheus_retention_time          = var.vault_prometheus_retention_time
 
   tags = var.tags
 }

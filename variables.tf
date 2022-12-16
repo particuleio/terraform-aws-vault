@@ -83,7 +83,7 @@ variable "vault_pki_client_certs" {
 }
 
 variable "vault_version" {
-  default = "1.11.3"
+  default = "1.12.2"
 }
 
 variable "vault_cert_dir" {
@@ -129,6 +129,11 @@ variable "vault_max_lease_ttl" {
 
 variable "vault_default_lease_ttl" {
   default = "192h"
+  type    = string
+}
+
+variable "vault_prometheus_retention_time" {
+  default = "6h"
   type    = string
 }
 

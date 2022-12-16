@@ -58,11 +58,15 @@ listener "tcp" {
   tls_key_file       = "${ vault_cert_dir }/cert-key.pem"
 }
 
-
 storage "dynamodb" {
   ha_enabled = "true"
   region     = "${ region }"
   table      = "${ dynamodb_table_name }"
+}
+
+telemetry {
+  disable_hostname = true
+  prometheus_retention_time = "${ prometheus_retention_time }"
 }
 
 ${ vault_additional_config }
