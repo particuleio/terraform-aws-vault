@@ -45,6 +45,8 @@ data "cloudinit_config" "userdata" {
         cfssl_version                            = var.cfssl_version
         vault_max_lease_ttl                      = var.vault_max_lease_ttl
         vault_default_lease_ttl                  = var.vault_default_lease_ttl
+        prometheus_retention_time                = var.vault_prometheus_retention_time
+        tls_min_version                          = var.vault_tls_min_version
       }
     )
   }

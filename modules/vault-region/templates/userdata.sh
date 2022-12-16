@@ -42,7 +42,7 @@ seal "awskms" {
 }
 
 listener "tcp" {
-  address     = ":9200"
+  address     = "127.0.0.1:9200"
   tls_disable = "true"
 }
 
@@ -51,18 +51,22 @@ listener "tcp" {
   cluster_address = "[::]:8201"
 
   tls_disable     = "false"
-  tls_min_version = "tls12"
+  tls_min_version = "${ tls_min_version }"
   tls_client_ca_file = "${ vault_cert_dir }/ca.crt"
   tls_cert_file      = "${ vault_cert_dir }/cert.pem"
   tls_require_and_verify_client_cert = ${ vault_tls_require_and_verify_client_cert }
   tls_key_file       = "${ vault_cert_dir }/cert-key.pem"
 }
 
-
 storage "dynamodb" {
   ha_enabled = "true"
   region     = "${ region }"
   table      = "${ dynamodb_table_name }"
+}
+
+telemetry {
+  disable_hostname = true
+  prometheus_retention_time = "${ prometheus_retention_time }"
 }
 
 ${ vault_additional_config }
