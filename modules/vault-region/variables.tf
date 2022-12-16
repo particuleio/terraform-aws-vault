@@ -91,6 +91,10 @@ variable "vault_prometheus_retention_time" {
   default = "6h"
   type    = string
 }
+variable "vault_tls_min_version" {
+  default = "tls12"
+  type    = string
+}
 
 variable "vpc_id" {
   type        = string

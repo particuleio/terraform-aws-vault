@@ -51,7 +51,7 @@ listener "tcp" {
   cluster_address = "[::]:8201"
 
   tls_disable     = "false"
-  tls_min_version = "tls12"
+  tls_min_version = "${ tls_min_version }"
   tls_client_ca_file = "${ vault_cert_dir }/ca.crt"
   tls_cert_file      = "${ vault_cert_dir }/cert.pem"
   tls_require_and_verify_client_cert = ${ vault_tls_require_and_verify_client_cert }
