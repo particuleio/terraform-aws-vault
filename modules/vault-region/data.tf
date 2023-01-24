@@ -2,6 +2,10 @@ data "aws_region" "current" {}
 
 data "aws_caller_identity" "current" {}
 
+data "aws_vpc" "vpc" {
+  id = var.vpc_id
+}
+
 data "aws_ami" "vault" {
   most_recent = true
   name_regex  = "vault-${var.vault_version}-al2022-*"
