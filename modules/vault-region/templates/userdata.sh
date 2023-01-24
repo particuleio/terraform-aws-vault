@@ -42,7 +42,7 @@ seal "awskms" {
 }
 
 listener "tcp" {
-  address     = "127.0.0.1:9200"
+  address     = "0.0.0.0:9200"
   tls_disable = "true"
 }
 
