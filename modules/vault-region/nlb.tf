@@ -38,40 +38,32 @@ resource "aws_lb_target_group" "vault" {
   deregistration_delay   = 0
 
   dynamic "health_check" {
-    for_each = var.vault_routing_policy == "leader_only" && !var.vault_tls_require_and_verify_client_cert ? [1] : []
+    for_each = var.vault_routing_policy == "leader_only" ? [1] : []
     content {
       enabled             = true
-      interval            = 10
+      interval            = 5
       path                = "/v1/sys/health"
-      protocol            = "HTTPS"
-      port                = "traffic-port"
+      protocol            = "HTTP"
+      port                = 9200
       healthy_threshold   = 2
       unhealthy_threshold = 2
+      timeout             = 2
+      matcher             = "200"
     }
   }
 
   dynamic "health_check" {
-    for_each = var.vault_routing_policy == "all" && !var.vault_tls_require_and_verify_client_cert ? [1] : []
+    for_each = var.vault_routing_policy == "all" ? [1] : []
     content {
       enabled             = true
-      interval            = 10
-      path                = "/v1/sys/leader"
-      protocol            = "HTTPS"
-      port                = "traffic-port"
+      interval            = 5
+      path                = "/v1/sys/health"
+      protocol            = "HTTP"
+      port                = 9200
       healthy_threshold   = 2
       unhealthy_threshold = 2
-    }
-  }
-
-  dynamic "health_check" {
-    for_each = var.vault_tls_require_and_verify_client_cert ? [1] : []
-    content {
-      enabled             = true
-      interval            = 10
-      protocol            = "TCP"
-      port                = "traffic-port"
-      healthy_threshold   = 2
-      unhealthy_threshold = 2
+      timeout             = 2
+      matcher             = "200,429"
     }
   }
 }

@@ -21,6 +21,13 @@ module "sg" {
       protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     },
+    {
+      description = "NLB Health Checks"
+      from_port   = 9200
+      to_port     = 9200
+      protocol    = "tcp"
+      cidr_blocks = data.aws_vpc.vpc.cidr_block
+    },
   ]
   ingress_with_ipv6_cidr_blocks = [
     {
@@ -29,6 +36,13 @@ module "sg" {
       to_port          = 8200
       protocol         = "tcp"
       ipv6_cidr_blocks = "::/0"
+    },
+    {
+      description      = "NLB Health Checks"
+      from_port        = 9200
+      to_port          = 9200
+      protocol         = "tcp"
+      ipv6_cidr_blocks = data.aws_vpc.vpc.ipv6_cidr_block
     },
   ]
   egress_with_cidr_blocks = [
