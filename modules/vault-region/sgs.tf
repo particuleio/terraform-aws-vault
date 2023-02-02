@@ -1,8 +1,9 @@
 module "sg" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
-  name    = var.name_prefix
-  vpc_id  = var.vpc_id
+  source      = "terraform-aws-modules/security-group/aws"
+  version     = "~> 4.0"
+  name        = var.name_prefix
+  vpc_id      = var.vpc_id
+  description = var.name_prefix
 
   ingress_with_self = [
     {
