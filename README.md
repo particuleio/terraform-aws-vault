@@ -86,7 +86,6 @@ Instances have SSM enable by default, no need for SSH keys.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_kms_dynamodb"></a> [kms\_dynamodb](#module\_kms\_dynamodb) | terraform-aws-modules/kms/aws | ~> 1.4 |
 | <a name="module_pki"></a> [pki](#module\_pki) | particuleio/pki/tls | ~> 2.0 |
 | <a name="module_primary"></a> [primary](#module\_primary) | ./modules/vault-region | n/a |
 | <a name="module_secondary"></a> [secondary](#module\_secondary) | ./modules/vault-region | n/a |
@@ -139,34 +138,34 @@ Instances have SSM enable by default, no need for SSH keys.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_asg"></a> [asg](#input\_asg) | Primary availability zone autoscaling group configuration | `any` | n/a | yes |
-| <a name="input_asg_defaults"></a> [asg\_defaults](#input\_asg\_defaults) | Default configuration for autoscaling groups | `any` | <pre>{<br>  "asg_associate_public_ip_address": false,<br>  "desired_capacity": 3,<br>  "disk_size": 20,<br>  "instance_type": "t3a.micro",<br>  "key_name": null,<br>  "max_size": 3,<br>  "min_size": 0,<br>  "tags": {},<br>  "tags_as_map": {},<br>  "vpc_zone_identifier": []<br>}</pre> | no |
-| <a name="input_asg_secondary"></a> [asg\_secondary](#input\_asg\_secondary) | Secondary availability zone autoscaling group configuration | `any` | n/a | yes |
-| <a name="input_cfssl_version"></a> [cfssl\_version](#input\_cfssl\_version) | CFSSL version | `string` | `"1.6.2"` | no |
+| <a name="input_asg"></a> [asg](#input\_asg) | n/a | `any` | n/a | yes |
+| <a name="input_asg_defaults"></a> [asg\_defaults](#input\_asg\_defaults) | n/a | `any` | <pre>{<br>  "asg_associate_public_ip_address": false,<br>  "desired_capacity": 3,<br>  "disk_size": 20,<br>  "instance_type": "t3a.micro",<br>  "key_name": null,<br>  "max_size": 3,<br>  "min_size": 0,<br>  "tags": {},<br>  "tags_as_map": {},<br>  "vpc_zone_identifier": []<br>}</pre> | no |
+| <a name="input_asg_secondary"></a> [asg\_secondary](#input\_asg\_secondary) | n/a | `any` | n/a | yes |
+| <a name="input_cfssl_version"></a> [cfssl\_version](#input\_cfssl\_version) | n/a | `string` | `"1.6.2"` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | A name to prefix every created resource with | `string` | n/a | yes |
-| <a name="input_nlb_defaults"></a> [nlb\_defaults](#input\_nlb\_defaults) | Default configuration for the NLBs | `any` | <pre>{<br>  "internal": false,<br>  "ip_address_type": "dualstack",<br>  "listener_port": 443,<br>  "subnets": []<br>}</pre> | no |
-| <a name="input_nlbs"></a> [nlbs](#input\_nlbs) | Primary availability zone NLB configuration | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
-| <a name="input_nlbs_secondary"></a> [nlbs\_secondary](#input\_nlbs\_secondary) | NLB for primary secondary zone | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
-| <a name="input_route53_private_zone_name"></a> [route53\_private\_zone\_name](#input\_route53\_private\_zone\_name) | Route53 private zone name | `string` | `""` | no |
-| <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | Route53 public zone name | `string` | `""` | no |
+| <a name="input_nlb_defaults"></a> [nlb\_defaults](#input\_nlb\_defaults) | n/a | `any` | <pre>{<br>  "internal": false,<br>  "ip_address_type": "dualstack",<br>  "listener_port": 443,<br>  "subnets": []<br>}</pre> | no |
+| <a name="input_nlbs"></a> [nlbs](#input\_nlbs) | n/a | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
+| <a name="input_nlbs_secondary"></a> [nlbs\_secondary](#input\_nlbs\_secondary) | n/a | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
+| <a name="input_route53_private_zone_name"></a> [route53\_private\_zone\_name](#input\_route53\_private\_zone\_name) | n/a | `string` | `""` | no |
+| <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | n/a | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
 | <a name="input_vault_additional_config"></a> [vault\_additional\_config](#input\_vault\_additional\_config) | Additional content to include in the vault configuration file | `string` | `""` | no |
 | <a name="input_vault_additional_userdata"></a> [vault\_additional\_userdata](#input\_vault\_additional\_userdata) | Additional content to include in the cloud-init userdata for the EC2 instances | `string` | `""` | no |
 | <a name="input_vault_api_address"></a> [vault\_api\_address](#input\_vault\_api\_address) | The address that vault will be accessible at | `string` | n/a | yes |
 | <a name="input_vault_cert_dir"></a> [vault\_cert\_dir](#input\_vault\_cert\_dir) | The directory on the OS to store Vault certificates | `string` | `"/usr/local/etc/vault/tls"` | no |
 | <a name="input_vault_config_dir"></a> [vault\_config\_dir](#input\_vault\_config\_dir) | The directory on the OS to store the Vault configuration | `string` | `"/usr/local/etc/vault"` | no |
-| <a name="input_vault_default_lease_ttl"></a> [vault\_default\_lease\_ttl](#input\_vault\_default\_lease\_ttl) | Vault default lease TTL | `string` | `"192h"` | no |
+| <a name="input_vault_default_lease_ttl"></a> [vault\_default\_lease\_ttl](#input\_vault\_default\_lease\_ttl) | n/a | `string` | `"192h"` | no |
 | <a name="input_vault_dns_domain"></a> [vault\_dns\_domain](#input\_vault\_dns\_domain) | The DNS address that vault will be accessible at | `string` | n/a | yes |
-| <a name="input_vault_max_lease_ttl"></a> [vault\_max\_lease\_ttl](#input\_vault\_max\_lease\_ttl) | Vault default maximum lease TTL | `string` | `"192h"` | no |
-| <a name="input_vault_pki_ca_config"></a> [vault\_pki\_ca\_config](#input\_vault\_pki\_ca\_config) | Vault PKI certificate authority configuration | `any` | `{}` | no |
-| <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | Vault PKI client certificates configuration | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
-| <a name="input_vault_prometheus_retention_time"></a> [vault\_prometheus\_retention\_time](#input\_vault\_prometheus\_retention\_time) | Vault prometheus metrics retention time | `string` | `"6h"` | no |
-| <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | NLBs routing policy for target groups | `string` | `"all"` | no |
-| <a name="input_vault_tls_min_version"></a> [vault\_tls\_min\_version](#input\_vault\_tls\_min\_version) | Vault minimum TLS version | `string` | `"tls12"` | no |
-| <a name="input_vault_tls_require_and_verify_client_cert"></a> [vault\_tls\_require\_and\_verify\_client\_cert](#input\_vault\_tls\_require\_and\_verify\_client\_cert) | Enforce client certificate verification | `bool` | `false` | no |
-| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | Vault version | `string` | `"1.12.2"` | no |
+| <a name="input_vault_max_lease_ttl"></a> [vault\_max\_lease\_ttl](#input\_vault\_max\_lease\_ttl) | n/a | `string` | `"192h"` | no |
+| <a name="input_vault_pki_ca_config"></a> [vault\_pki\_ca\_config](#input\_vault\_pki\_ca\_config) | n/a | `any` | `{}` | no |
+| <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
+| <a name="input_vault_prometheus_retention_time"></a> [vault\_prometheus\_retention\_time](#input\_vault\_prometheus\_retention\_time) | n/a | `string` | `"6h"` | no |
+| <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
+| <a name="input_vault_tls_min_version"></a> [vault\_tls\_min\_version](#input\_vault\_tls\_min\_version) | n/a | `string` | `"tls12"` | no |
+| <a name="input_vault_tls_require_and_verify_client_cert"></a> [vault\_tls\_require\_and\_verify\_client\_cert](#input\_vault\_tls\_require\_and\_verify\_client\_cert) | n/a | `bool` | `false` | no |
+| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.12.2"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to use | `string` | n/a | yes |
-| <a name="input_vpc_peering_enabled"></a> [vpc\_peering\_enabled](#input\_vpc\_peering\_enabled) | Enable VPC peering between availability zones | `bool` | `true` | no |
+| <a name="input_vpc_peering_enabled"></a> [vpc\_peering\_enabled](#input\_vpc\_peering\_enabled) | n/a | `bool` | `true` | no |
 | <a name="input_vpc_secondary_id"></a> [vpc\_secondary\_id](#input\_vpc\_secondary\_id) | The ID of the VPC to use | `string` | n/a | yes |
 
 ## Outputs

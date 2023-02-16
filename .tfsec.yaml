@@ -1,8 +1,0 @@
----
-exclude:
-  - aws-eks-no-public-cluster-access
-  - aws-ec2-no-public-ingress-sgr
-  - aws-ec2-no-public-egress-sgr
-  - aws-eks-no-public-cluster-access-to-cidr
-  - aws-iam-no-policy-wildcards
-  - aws-elb-alb-not-public

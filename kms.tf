@@ -26,18 +26,3 @@ resource "aws_kms_replica_key" "seal" {
   description     = "KMS key used for ${var.name_prefix} seal"
   primary_key_arn = aws_kms_key.seal.arn
 }
-
-module "kms_dynamodb" {
-  source      = "terraform-aws-modules/kms/aws"
-  version     = "~> 1.4"
-  description = "KMS key used for ${var.name_prefix} DynamoDB"
-
-  aliases = [
-    "${var.name_prefix}/dynamodb"
-  ]
-
-  tags = merge(
-    { "Name" = "${var.name_prefix}-dynamodb" },
-    var.tags,
-  )
-}

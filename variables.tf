@@ -17,20 +17,15 @@ variable "tags" {
 }
 
 variable "cfssl_version" {
-  type        = string
-  description = "CFSSL version"
-  default     = "1.6.2"
+  default = "1.6.2"
 }
 
 variable "vpc_peering_enabled" {
-  type        = bool
-  default     = true
-  description = "Enable VPC peering between availability zones"
+  default = true
 }
 
 variable "asg_defaults" {
-  type        = any
-  description = "Default configuration for autoscaling groups"
+  type = any
   default = {
     desired_capacity                = 3
     min_size                        = 0
@@ -46,8 +41,7 @@ variable "asg_defaults" {
 }
 
 variable "nlb_defaults" {
-  type        = any
-  description = "Default configuration for the NLBs"
+  type = any
   default = {
     internal        = false
     listener_port   = 443
@@ -67,14 +61,12 @@ variable "vault_dns_domain" {
 }
 
 variable "vault_pki_ca_config" {
-  type        = any
-  default     = {}
-  description = "Vault PKI certificate authority configuration"
+  type    = any
+  default = {}
 }
 
 variable "vault_pki_client_certs" {
-  type        = any
-  description = "Vault PKI client certificates configuration"
+  type = any
   default = {
     "default" = {
       usages = [
@@ -91,9 +83,7 @@ variable "vault_pki_client_certs" {
 }
 
 variable "vault_version" {
-  type        = string
-  default     = "1.12.2"
-  description = "Vault version"
+  default = "1.12.2"
 }
 
 variable "vault_cert_dir" {
@@ -121,9 +111,7 @@ variable "vault_additional_userdata" {
 }
 
 variable "vault_routing_policy" {
-  type        = string
-  default     = "all"
-  description = "NLBs routing policy for target groups"
+  default = "all"
   validation {
     condition     = contains(["leader_only", "all"], var.vault_routing_policy)
     error_message = "Values can only be \"leader_only\" or \"all\"."
@@ -131,33 +119,27 @@ variable "vault_routing_policy" {
 }
 
 variable "vault_tls_require_and_verify_client_cert" {
-  type        = bool
-  default     = false
-  description = "Enforce client certificate verification"
+  default = false
 }
 
 variable "vault_max_lease_ttl" {
-  default     = "192h"
-  type        = string
-  description = "Vault default maximum lease TTL"
+  default = "192h"
+  type    = string
 }
 
 variable "vault_default_lease_ttl" {
-  default     = "192h"
-  type        = string
-  description = "Vault default lease TTL"
+  default = "192h"
+  type    = string
 }
 
 variable "vault_prometheus_retention_time" {
-  default     = "6h"
-  type        = string
-  description = "Vault prometheus metrics retention time"
+  default = "6h"
+  type    = string
 }
 
 variable "vault_tls_min_version" {
-  default     = "tls12"
-  type        = string
-  description = "Vault minimum TLS version"
+  default = "tls12"
+  type    = string
 }
 
 #############################
@@ -179,13 +161,11 @@ variable "vpc_secondary_id" {
 #############################
 
 variable "asg" {
-  type        = any
-  description = "Primary availability zone autoscaling group configuration"
+  type = any
 }
 
 variable "asg_secondary" {
-  type        = any
-  description = "Secondary availability zone autoscaling group configuration"
+  type = any
 }
 
 #############################
@@ -193,8 +173,7 @@ variable "asg_secondary" {
 #############################
 
 variable "nlbs" {
-  type        = any
-  description = "Primary availability zone NLB configuration"
+  type = any
   default = {
     "external" = {
     }
@@ -205,8 +184,7 @@ variable "nlbs" {
 }
 
 variable "nlbs_secondary" {
-  type        = any
-  description = "NLB for primary secondary zone"
+  type = any
   default = {
     "external" = {
     }
@@ -221,13 +199,9 @@ variable "nlbs_secondary" {
 #############################
 
 variable "route53_zone_name" {
-  type        = string
-  description = "Route53 public zone name"
-  default     = ""
+  default = ""
 }
 
 variable "route53_private_zone_name" {
-  type        = string
-  description = "Route53 private zone name"
-  default     = ""
+  default = ""
 }
