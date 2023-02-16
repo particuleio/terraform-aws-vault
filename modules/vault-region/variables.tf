@@ -26,7 +26,7 @@ variable "tags" {
 }
 
 variable "vault_version" {
-  default = "1.12.2"
+  default = "1.12.3"
 }
 
 variable "vault_cert_dir" {
