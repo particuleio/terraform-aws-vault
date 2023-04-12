@@ -15,6 +15,10 @@ module "primary" {
 
   vault_kms_seal_key_id = aws_kms_key.seal.key_id
 
+
+  ami_owners     = var.ami_owners
+  ami_name_regex = var.ami_name_regex
+
   vault_version                            = var.vault_version
   vault_cert_dir                           = var.vault_cert_dir
   vault_config_dir                         = var.vault_config_dir
@@ -51,6 +55,9 @@ module "secondary" {
   iam_instance_profile_arn = aws_iam_instance_profile.vault.arn
 
   vault_kms_seal_key_id = aws_kms_key.seal.key_id
+
+  ami_owners     = var.ami_owners
+  ami_name_regex = var.ami_name_regex
 
   vault_version                            = var.vault_version
   vault_cert_dir                           = var.vault_cert_dir

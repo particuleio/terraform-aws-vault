@@ -8,8 +8,8 @@ data "aws_vpc" "vpc" {
 
 data "aws_ami" "vault" {
   most_recent = true
-  name_regex  = "vault-${var.vault_version}-al2022-*"
-  owners      = ["886701765425"]
+  name_regex  = var.ami_name_regex != null ? var.ami_name_regex : "vault-${var.vault_version}-al202*-*"
+  owners      = var.ami_owners
 
   filter {
     name   = "root-device-type"

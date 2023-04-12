@@ -14,6 +14,18 @@ variable "name_prefix" {
   default = "vault-"
 }
 
+variable "ami_owners" {
+  type = list(string)
+  default = [
+    "886701765425",
+  ]
+}
+
+variable "ami_name_regex" {
+  type    = string
+  default = null
+}
+
 variable "nlbs" {
   type    = any
   default = {}
