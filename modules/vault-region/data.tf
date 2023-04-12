@@ -8,7 +8,7 @@ data "aws_vpc" "vpc" {
 
 data "aws_ami" "vault" {
   most_recent = true
-  name_regex  = try(var.ami_name_regex, "vault-${var.vault_version}-al202*-*")
+  name_regex  = var.ami_name_regex != null ? var.ami_name_regex : "vault-${var.vault_version}-al202*-*"
   owners      = var.ami_owners
 
   filter {
