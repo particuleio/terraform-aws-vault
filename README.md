@@ -138,6 +138,8 @@ Instances have SSM enable by default, no need for SSH keys.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_ami_name_regex"></a> [ami\_name\_regex](#input\_ami\_name\_regex) | n/a | `string` | `null` | no |
+| <a name="input_ami_owners"></a> [ami\_owners](#input\_ami\_owners) | n/a | `list(string)` | <pre>[<br>  "886701765425"<br>]</pre> | no |
 | <a name="input_asg"></a> [asg](#input\_asg) | n/a | `any` | n/a | yes |
 | <a name="input_asg_defaults"></a> [asg\_defaults](#input\_asg\_defaults) | n/a | `any` | <pre>{<br>  "asg_associate_public_ip_address": false,<br>  "desired_capacity": 3,<br>  "disk_size": 20,<br>  "instance_type": "t3a.micro",<br>  "key_name": null,<br>  "max_size": 3,<br>  "min_size": 0,<br>  "tags": {},<br>  "tags_as_map": {},<br>  "vpc_zone_identifier": []<br>}</pre> | no |
 | <a name="input_asg_secondary"></a> [asg\_secondary](#input\_asg\_secondary) | n/a | `any` | n/a | yes |

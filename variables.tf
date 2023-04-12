@@ -16,6 +16,18 @@ variable "tags" {
   default     = {}
 }
 
+variable "ami_owners" {
+  type = list(string)
+  default = [
+    "886701765425",
+  ]
+}
+
+variable "ami_name_regex" {
+  type    = string
+  default = null
+}
+
 variable "cfssl_version" {
   default = "1.6.2"
 }
