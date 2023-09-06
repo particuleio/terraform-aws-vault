@@ -73,14 +73,14 @@ Instances have SSM enable by default, no need for SSH keys.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.7 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.7 |
-| <a name="provider_aws.secondary"></a> [aws.secondary](#provider\_aws.secondary) | >= 4.7 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
+| <a name="provider_aws.secondary"></a> [aws.secondary](#provider\_aws.secondary) | >= 5.0 |
 
 ## Modules
 
@@ -143,7 +143,7 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_asg"></a> [asg](#input\_asg) | n/a | `any` | n/a | yes |
 | <a name="input_asg_defaults"></a> [asg\_defaults](#input\_asg\_defaults) | n/a | `any` | <pre>{<br>  "asg_associate_public_ip_address": false,<br>  "desired_capacity": 3,<br>  "disk_size": 20,<br>  "instance_type": "t3a.micro",<br>  "key_name": null,<br>  "max_size": 3,<br>  "min_size": 0,<br>  "tags": {},<br>  "tags_as_map": {},<br>  "vpc_zone_identifier": []<br>}</pre> | no |
 | <a name="input_asg_secondary"></a> [asg\_secondary](#input\_asg\_secondary) | n/a | `any` | n/a | yes |
-| <a name="input_cfssl_version"></a> [cfssl\_version](#input\_cfssl\_version) | n/a | `string` | `"1.6.2"` | no |
+| <a name="input_cfssl_version"></a> [cfssl\_version](#input\_cfssl\_version) | n/a | `string` | `"1.6.4"` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | A name to prefix every created resource with | `string` | n/a | yes |
 | <a name="input_nlb_defaults"></a> [nlb\_defaults](#input\_nlb\_defaults) | n/a | `any` | <pre>{<br>  "internal": false,<br>  "ip_address_type": "dualstack",<br>  "listener_port": 443,<br>  "subnets": []<br>}</pre> | no |
 | <a name="input_nlbs"></a> [nlbs](#input\_nlbs) | n/a | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
@@ -165,7 +165,7 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
 | <a name="input_vault_tls_min_version"></a> [vault\_tls\_min\_version](#input\_vault\_tls\_min\_version) | n/a | `string` | `"tls12"` | no |
 | <a name="input_vault_tls_require_and_verify_client_cert"></a> [vault\_tls\_require\_and\_verify\_client\_cert](#input\_vault\_tls\_require\_and\_verify\_client\_cert) | n/a | `bool` | `false` | no |
-| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.12.3"` | no |
+| <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | n/a | `string` | `"1.14.2"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to use | `string` | n/a | yes |
 | <a name="input_vpc_peering_enabled"></a> [vpc\_peering\_enabled](#input\_vpc\_peering\_enabled) | n/a | `bool` | `true` | no |
 | <a name="input_vpc_secondary_id"></a> [vpc\_secondary\_id](#input\_vpc\_secondary\_id) | The ID of the VPC to use | `string` | n/a | yes |
