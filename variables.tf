@@ -29,7 +29,7 @@ variable "ami_name_regex" {
 }
 
 variable "cfssl_version" {
-  default = "1.6.2"
+  default = "1.6.4"
 }
 
 variable "vpc_peering_enabled" {
@@ -95,7 +95,7 @@ variable "vault_pki_client_certs" {
 }
 
 variable "vault_version" {
-  default = "1.12.3"
+  default = "1.14.2"
 }
 
 variable "vault_cert_dir" {

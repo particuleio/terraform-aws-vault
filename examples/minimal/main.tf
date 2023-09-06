@@ -7,7 +7,7 @@ locals {
 
 module "vpc_primary" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   name = local.name_prefix
   cidr = local.vpc_primary_cidr
@@ -16,10 +16,11 @@ module "vpc_primary" {
   public_subnets  = [for k, v in slice(data.aws_availability_zones.primary.names, 0, 3) : cidrsubnet(local.vpc_primary_cidr, 3, k)]
   private_subnets = [for k, v in slice(data.aws_availability_zones.primary.names, 0, 3) : cidrsubnet(local.vpc_primary_cidr, 3, k + 3)]
 
-  enable_ipv6                     = true
-  assign_ipv6_address_on_creation = true
-  public_subnet_ipv6_prefixes     = [0, 1, 2]
-  private_subnet_ipv6_prefixes    = [3, 4, 5]
+  enable_ipv6                                    = true
+  public_subnet_ipv6_prefixes                    = [0, 1, 2]
+  public_subnet_assign_ipv6_address_on_creation  = true
+  private_subnet_ipv6_prefixes                   = [3, 4, 5]
+  private_subnet_assign_ipv6_address_on_creation = true
 
   enable_nat_gateway   = true
   single_nat_gateway   = true
@@ -51,7 +52,7 @@ module "vpc_primary" {
 
 module "vpc_endpoints_primary" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "~> 3.0"
+  version = "~> 5.0"
   vpc_id  = module.vpc_primary.vpc_id
   endpoints = {
     s3 = {
@@ -83,7 +84,7 @@ module "vpc_secondary" {
     aws = aws.secondary
   }
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   name = local.name_prefix
   cidr = local.vpc_secondary_cidr
@@ -92,10 +93,11 @@ module "vpc_secondary" {
   public_subnets  = [for k, v in slice(data.aws_availability_zones.secondary.names, 0, 3) : cidrsubnet(local.vpc_secondary_cidr, 3, k)]
   private_subnets = [for k, v in slice(data.aws_availability_zones.secondary.names, 0, 3) : cidrsubnet(local.vpc_secondary_cidr, 3, k + 3)]
 
-  enable_ipv6                     = true
-  assign_ipv6_address_on_creation = true
-  public_subnet_ipv6_prefixes     = [0, 1, 2]
-  private_subnet_ipv6_prefixes    = [3, 4, 5]
+  enable_ipv6                                    = true
+  public_subnet_ipv6_prefixes                    = [0, 1, 2]
+  public_subnet_assign_ipv6_address_on_creation  = true
+  private_subnet_ipv6_prefixes                   = [3, 4, 5]
+  private_subnet_assign_ipv6_address_on_creation = true
 
   enable_nat_gateway   = true
   single_nat_gateway   = true
