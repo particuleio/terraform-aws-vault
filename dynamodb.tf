@@ -1,5 +1,6 @@
 resource "aws_dynamodb_table" "dynamodb_table" {
-  name = var.name_prefix
+  count = var.existing_dynamodb_tables == {} ? 1 : 0
+  name  = var.name_prefix
 
   billing_mode     = "PAY_PER_REQUEST"
   stream_enabled   = true
