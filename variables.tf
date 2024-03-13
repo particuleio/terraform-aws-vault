@@ -217,3 +217,21 @@ variable "route53_zone_name" {
 variable "route53_private_zone_name" {
   default = ""
 }
+
+variable "existing_dynamodb_tables" {
+  default = {}
+  type = object({
+    primary = optional(object({
+      name = string
+    }))
+    secondary = optional(object({
+      name = string
+    }))
+  })
+  description = "use exising dynamodbs tables (useful for recovery)"
+}
+
+variable "existing_kms_seal_key_id" {
+  default     = ""
+  description = "use existing kms unseal key (useful for recovery)"
+}
