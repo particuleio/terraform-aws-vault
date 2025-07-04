@@ -9,7 +9,7 @@ module "secrets" {
       content = module.pki.ca.cert.cert_pem
       replicas = [
         {
-          region = data.aws_region.secondary.name
+          region = data.aws_region.secondary.region
         }
       ]
       force_overwrite_replica_secret = true
@@ -20,7 +20,7 @@ module "secrets" {
       content = module.pki.ca.private_key.private_key_pem
       replicas = [
         {
-          region = data.aws_region.secondary.name
+          region = data.aws_region.secondary.region
         }
       ]
       force_overwrite_replica_secret = true

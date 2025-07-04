@@ -13,7 +13,7 @@ resource "aws_route53_record" "public_a" {
     weight = 1
   }
 
-  set_identifier = "${var.name_prefix}-${data.aws_region.current.name}"
+  set_identifier = "${var.name_prefix}-${data.aws_region.current.region}"
 
   alias {
     name                   = module.primary.nlbs.external.dns_name
@@ -32,7 +32,7 @@ resource "aws_route53_record" "public_a_secondary" {
     weight = 1
   }
 
-  set_identifier = "${var.name_prefix}-${data.aws_region.secondary.name}"
+  set_identifier = "${var.name_prefix}-${data.aws_region.secondary.region}"
 
   alias {
     name                   = module.secondary.nlbs.external.dns_name
@@ -51,7 +51,7 @@ resource "aws_route53_record" "public_aaaa" {
     weight = 1
   }
 
-  set_identifier = "${var.name_prefix}-${data.aws_region.current.name}"
+  set_identifier = "${var.name_prefix}-${data.aws_region.current.region}"
 
   alias {
     name                   = module.primary.nlbs.external.dns_name
@@ -70,7 +70,7 @@ resource "aws_route53_record" "public_aaaa_secondary" {
     weight = 1
   }
 
-  set_identifier = "${var.name_prefix}-${data.aws_region.secondary.name}"
+  set_identifier = "${var.name_prefix}-${data.aws_region.secondary.region}"
 
   alias {
     name                   = module.secondary.nlbs.external.dns_name
