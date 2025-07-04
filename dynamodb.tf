@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "dynamodb_table" {
-  count = var.existing_dynamodb_tables == {} ? 1 : 0
+  count = can(var.existing_dynamodb_tables.primary.name) ? 0 : 1
   name  = var.name_prefix
 
   billing_mode     = "PAY_PER_REQUEST"
