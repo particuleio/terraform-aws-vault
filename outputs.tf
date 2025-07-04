@@ -3,7 +3,7 @@ output "secrets" {
 }
 
 output "dynamodb" {
-  value = aws_dynamodb_table.dynamodb_table
+  value = try(aws_dynamodb_table.dynamodb_table[0], null)
 }
 
 output "vault_pki" {
