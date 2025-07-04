@@ -11,7 +11,12 @@ module "asg" {
   desired_capacity    = try(var.asg.desired_capacity, 3)
   vpc_zone_identifier = var.asg.vpc_zone_identifier
 
-  target_group_arns = [for k, v in var.nlbs : aws_lb_target_group.vault[k].arn]
+  traffic_source_attachments = {
+    for k, v in var.nlbs: k => {
+      traffic_source_identifier = aws_lb_target_group.vault[k].arn
+      traffic_source_type = "elbv2"
+    }
+  }
 
   health_check_grace_period = try(var.asg.health_check_grace_period, 0)
   wait_for_capacity_timeout = try(var.asg.wait_for_capacity_timeout, 0)
