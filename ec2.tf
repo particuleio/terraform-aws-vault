@@ -9,7 +9,7 @@ module "primary" {
 
   nlbs = local.nlbs
 
-  dynamodb_table_name = var.existing_dynamodb_tables == {} ? aws_dynamodb_table.dynamodb_table[0].id : var.existing_dynamodb_tables.primary.name
+  dynamodb_table_name = can(var.existing_dynamodb_tables.primary.name) ? var.existing_dynamodb_tables.primary.name : aws_dynamodb_table.dynamodb_table[0].id
 
   iam_instance_profile_arn = aws_iam_instance_profile.vault.arn
 
@@ -50,7 +50,7 @@ module "secondary" {
 
   nlbs = local.nlbs_secondary
 
-  dynamodb_table_name = var.existing_dynamodb_tables == {} ? aws_dynamodb_table.dynamodb_table[0].id : var.existing_dynamodb_tables.secondary.name
+  dynamodb_table_name = can(var.existing_dynamodb_tables.secondary.name) ? var.existing_dynamodb_tables.secondary.name : aws_dynamodb_table.dynamodb_table[0].id
 
   iam_instance_profile_arn = aws_iam_instance_profile.vault.arn
 

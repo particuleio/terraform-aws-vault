@@ -31,12 +31,12 @@ data "aws_route_tables" "vpc_secondary" {
 }
 
 data "aws_dynamodb_table" "existing_dynamodb_table_primary" {
-  count = var.existing_dynamodb_tables == {} ? 0 : 1
+  count = can(var.existing_dynamodb_tables.primary.name) ? 1 : 0
   name  = var.existing_dynamodb_tables.primary.name
 }
 
 data "aws_dynamodb_table" "existing_dynamodb_table_secondary" {
-  count = var.existing_dynamodb_tables == {} ? 0 : 1
+  count = can(var.existing_dynamodb_tables.secondary.name) ? 1 : 0
   name  = var.existing_dynamodb_tables.secondary.name
 }
 

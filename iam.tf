@@ -76,7 +76,7 @@ data "aws_iam_policy_document" "vault" {
       "dynamodb:DescribeTable",
     ]
 
-    resources = var.existing_dynamodb_tables == {} ? [
+    resources = !can(data.aws_dynamodb_table.existing_dynamodb_table_primary[0]) || !can(data.aws_dynamodb_table.existing_dynamodb_table_secondary[0]) ? [
       "arn:aws:dynamodb:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table[0].id}",
       "arn:aws:dynamodb:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table[0].id}/*",
       "arn:aws:dynamodb:${data.aws_region.secondary.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table[0].id}",
