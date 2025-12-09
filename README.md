@@ -67,7 +67,7 @@ Pariticule build and maintain AMI on AWS region available by default. Please pen
 Instances have SSM enable by default, no need for SSH keys.
 
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -142,17 +142,17 @@ Instances have SSM enable by default, no need for SSH keys.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_ami_name_regex"></a> [ami\_name\_regex](#input\_ami\_name\_regex) | n/a | `string` | `null` | no |
-| <a name="input_ami_owners"></a> [ami\_owners](#input\_ami\_owners) | n/a | `list(string)` | <pre>[<br>  "886701765425"<br>]</pre> | no |
+| <a name="input_ami_owners"></a> [ami\_owners](#input\_ami\_owners) | n/a | `list(string)` | <pre>[<br/>  "886701765425"<br/>]</pre> | no |
 | <a name="input_asg"></a> [asg](#input\_asg) | n/a | `any` | n/a | yes |
-| <a name="input_asg_defaults"></a> [asg\_defaults](#input\_asg\_defaults) | n/a | `any` | <pre>{<br>  "asg_associate_public_ip_address": false,<br>  "desired_capacity": 3,<br>  "disk_size": 20,<br>  "instance_type": "t3a.micro",<br>  "key_name": null,<br>  "max_size": 3,<br>  "min_size": 0,<br>  "tags": {},<br>  "tags_as_map": {},<br>  "vpc_zone_identifier": []<br>}</pre> | no |
+| <a name="input_asg_defaults"></a> [asg\_defaults](#input\_asg\_defaults) | n/a | `any` | <pre>{<br/>  "asg_associate_public_ip_address": false,<br/>  "desired_capacity": 3,<br/>  "disk_size": 20,<br/>  "instance_type": "t3a.micro",<br/>  "key_name": null,<br/>  "max_size": 3,<br/>  "min_size": 0,<br/>  "tags": {},<br/>  "tags_as_map": {},<br/>  "vpc_zone_identifier": []<br/>}</pre> | no |
 | <a name="input_asg_secondary"></a> [asg\_secondary](#input\_asg\_secondary) | n/a | `any` | n/a | yes |
 | <a name="input_cfssl_version"></a> [cfssl\_version](#input\_cfssl\_version) | n/a | `string` | `"1.6.4"` | no |
-| <a name="input_existing_dynamodb_tables"></a> [existing\_dynamodb\_tables](#input\_existing\_dynamodb\_tables) | use exising dynamodbs tables (useful for recovery) | <pre>object({<br>    primary = optional(object({<br>      name = string<br>    }))<br>    secondary = optional(object({<br>      name = string<br>    }))<br>  })</pre> | `{}` | no |
+| <a name="input_existing_dynamodb_tables"></a> [existing\_dynamodb\_tables](#input\_existing\_dynamodb\_tables) | use exising dynamodbs tables (useful for recovery) | <pre>object({<br/>    primary = optional(object({<br/>      name = string<br/>    }))<br/>    secondary = optional(object({<br/>      name = string<br/>    }))<br/>  })</pre> | `{}` | no |
 | <a name="input_existing_kms_seal_key_id"></a> [existing\_kms\_seal\_key\_id](#input\_existing\_kms\_seal\_key\_id) | use existing kms unseal key (useful for recovery) | `string` | `""` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | A name to prefix every created resource with | `string` | n/a | yes |
-| <a name="input_nlb_defaults"></a> [nlb\_defaults](#input\_nlb\_defaults) | n/a | `any` | <pre>{<br>  "internal": false,<br>  "ip_address_type": "dualstack",<br>  "listener_port": 443,<br>  "subnets": []<br>}</pre> | no |
-| <a name="input_nlbs"></a> [nlbs](#input\_nlbs) | n/a | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
-| <a name="input_nlbs_secondary"></a> [nlbs\_secondary](#input\_nlbs\_secondary) | n/a | `any` | <pre>{<br>  "external": {},<br>  "internal": {<br>    "internal": true<br>  }<br>}</pre> | no |
+| <a name="input_nlb_defaults"></a> [nlb\_defaults](#input\_nlb\_defaults) | n/a | `any` | <pre>{<br/>  "internal": false,<br/>  "ip_address_type": "dualstack",<br/>  "listener_port": 443,<br/>  "subnets": []<br/>}</pre> | no |
+| <a name="input_nlbs"></a> [nlbs](#input\_nlbs) | n/a | `any` | <pre>{<br/>  "external": {},<br/>  "internal": {<br/>    "internal": true<br/>  }<br/>}</pre> | no |
+| <a name="input_nlbs_secondary"></a> [nlbs\_secondary](#input\_nlbs\_secondary) | n/a | `any` | <pre>{<br/>  "external": {},<br/>  "internal": {<br/>    "internal": true<br/>  }<br/>}</pre> | no |
 | <a name="input_route53_private_zone_name"></a> [route53\_private\_zone\_name](#input\_route53\_private\_zone\_name) | n/a | `string` | `""` | no |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | n/a | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
@@ -165,7 +165,7 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_vault_dns_domain"></a> [vault\_dns\_domain](#input\_vault\_dns\_domain) | The DNS address that vault will be accessible at | `string` | n/a | yes |
 | <a name="input_vault_max_lease_ttl"></a> [vault\_max\_lease\_ttl](#input\_vault\_max\_lease\_ttl) | n/a | `string` | `"192h"` | no |
 | <a name="input_vault_pki_ca_config"></a> [vault\_pki\_ca\_config](#input\_vault\_pki\_ca\_config) | n/a | `any` | `{}` | no |
-| <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br>  "default": {<br>    "subject": {<br>      "common_name": "default-vault-client"<br>    },<br>    "usages": [<br>      "client_auth",<br>      "key_encipherement",<br>      "digital_signature"<br>    ]<br>  }<br>}</pre> | no |
+| <a name="input_vault_pki_client_certs"></a> [vault\_pki\_client\_certs](#input\_vault\_pki\_client\_certs) | n/a | `any` | <pre>{<br/>  "default": {<br/>    "subject": {<br/>      "common_name": "default-vault-client"<br/>    },<br/>    "usages": [<br/>      "client_auth",<br/>      "key_encipherement",<br/>      "digital_signature"<br/>    ]<br/>  }<br/>}</pre> | no |
 | <a name="input_vault_prometheus_retention_time"></a> [vault\_prometheus\_retention\_time](#input\_vault\_prometheus\_retention\_time) | n/a | `string` | `"6h"` | no |
 | <a name="input_vault_routing_policy"></a> [vault\_routing\_policy](#input\_vault\_routing\_policy) | n/a | `string` | `"all"` | no |
 | <a name="input_vault_tls_min_version"></a> [vault\_tls\_min\_version](#input\_vault\_tls\_min\_version) | n/a | `string` | `"tls12"` | no |
@@ -185,4 +185,4 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="output_secrets"></a> [secrets](#output\_secrets) | n/a |
 | <a name="output_vault_dns_domain"></a> [vault\_dns\_domain](#output\_vault\_dns\_domain) | n/a |
 | <a name="output_vault_pki"></a> [vault\_pki](#output\_vault\_pki) | n/a |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
