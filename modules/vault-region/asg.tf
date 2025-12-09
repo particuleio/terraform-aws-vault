@@ -1,6 +1,6 @@
 module "asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "~> 7.0"
+  version = "~> 9.0"
 
   name = try(var.asg.name_prefix, var.name_prefix)
 
