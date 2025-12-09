@@ -12,9 +12,9 @@ module "asg" {
   vpc_zone_identifier = var.asg.vpc_zone_identifier
 
   traffic_source_attachments = {
-    for k, v in var.nlbs: k => {
+    for k, v in var.nlbs : k => {
       traffic_source_identifier = aws_lb_target_group.vault[k].arn
-      traffic_source_type = "elbv2"
+      traffic_source_type       = "elbv2"
     }
   }
 
