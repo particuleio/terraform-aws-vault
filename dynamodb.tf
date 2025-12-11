@@ -1,5 +1,6 @@
 resource "aws_dynamodb_table" "dynamodb_table" {
-  name = var.name_prefix
+  count = can(var.existing_dynamodb_tables.primary.name) ? 0 : 1
+  name  = var.name_prefix
 
   billing_mode     = "PAY_PER_REQUEST"
   stream_enabled   = true
@@ -27,7 +28,7 @@ resource "aws_dynamodb_table" "dynamodb_table" {
   }
 
   replica {
-    region_name            = data.aws_region.secondary.name
+    region_name            = data.aws_region.secondary.region
     point_in_time_recovery = true
     propagate_tags         = true
   }

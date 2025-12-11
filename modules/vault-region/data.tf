@@ -35,7 +35,7 @@ data "cloudinit_config" "userdata" {
       {
         account_id                               = data.aws_caller_identity.current.account_id
         name_prefix                              = var.name_prefix
-        region                                   = data.aws_region.current.name
+        region                                   = data.aws_region.current.region
         vault_cert_dir                           = var.vault_cert_dir
         vault_config_dir                         = var.vault_config_dir
         vault_additional_userdata                = var.vault_additional_userdata

@@ -29,3 +29,18 @@ data "aws_route_tables" "vpc_secondary" {
   provider = aws.secondary
   vpc_id   = var.vpc_secondary_id
 }
+
+data "aws_dynamodb_table" "existing_dynamodb_table_primary" {
+  count = can(var.existing_dynamodb_tables.primary.name) ? 1 : 0
+  name  = var.existing_dynamodb_tables.primary.name
+}
+
+data "aws_dynamodb_table" "existing_dynamodb_table_secondary" {
+  count = can(var.existing_dynamodb_tables.secondary.name) ? 1 : 0
+  name  = var.existing_dynamodb_tables.secondary.name
+}
+
+data "aws_kms_key" "existing_kms_seal_key_id" {
+  count  = var.existing_kms_seal_key_id == "" ? 0 : 1
+  key_id = var.existing_kms_seal_key_id
+}

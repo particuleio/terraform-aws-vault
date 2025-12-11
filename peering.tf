@@ -2,7 +2,7 @@ resource "aws_vpc_peering_connection" "vault" {
   count       = var.vpc_peering_enabled ? 1 : 0
   vpc_id      = var.vpc_id
   peer_vpc_id = var.vpc_secondary_id
-  peer_region = data.aws_region.secondary.name
+  peer_region = data.aws_region.secondary.region
   auto_accept = false
 
   tags = merge(

@@ -76,11 +76,16 @@ data "aws_iam_policy_document" "vault" {
       "dynamodb:DescribeTable",
     ]
 
-    resources = [
-      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}",
-      "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}/*",
-      "arn:aws:dynamodb:${data.aws_region.secondary.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}",
-      "arn:aws:dynamodb:${data.aws_region.secondary.name}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table.id}/*",
+    resources = !can(data.aws_dynamodb_table.existing_dynamodb_table_primary[0]) || !can(data.aws_dynamodb_table.existing_dynamodb_table_secondary[0]) ? [
+      "arn:aws:dynamodb:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table[0].id}",
+      "arn:aws:dynamodb:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table[0].id}/*",
+      "arn:aws:dynamodb:${data.aws_region.secondary.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table[0].id}",
+      "arn:aws:dynamodb:${data.aws_region.secondary.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.dynamodb_table[0].id}/*",
+      ] : [
+      "${data.aws_dynamodb_table.existing_dynamodb_table_primary[0].arn}",
+      "${data.aws_dynamodb_table.existing_dynamodb_table_primary[0].arn}/*",
+      "${data.aws_dynamodb_table.existing_dynamodb_table_secondary[0].arn}",
+      "${data.aws_dynamodb_table.existing_dynamodb_table_secondary[0].arn}/*",
     ]
   }
 
@@ -93,9 +98,11 @@ data "aws_iam_policy_document" "vault" {
       "kms:DescribeKey",
     ]
 
-    resources = [
-      aws_kms_key.seal.arn,
-      aws_kms_replica_key.seal.arn
+    resources = var.existing_kms_seal_key_id == "" ? [
+      aws_kms_key.seal[0].arn,
+      aws_kms_replica_key.seal[0].arn
+      ] : [
+      data.aws_kms_key.existing_kms_seal_key_id[0].arn,
     ]
   }
 
@@ -108,8 +115,8 @@ data "aws_iam_policy_document" "vault" {
     ]
 
     resources = concat(
-      [for k, v in module.secrets.secrets : "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:${lookup(v, "name", k)}*"],
-      [for k, v in module.secrets.secrets : "arn:aws:secretsmanager:${data.aws_region.secondary.name}:${data.aws_caller_identity.current.account_id}:secret:${lookup(v, "name", k)}*"]
+      [for k, v in module.secrets.secrets : "arn:aws:secretsmanager:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:secret:${lookup(v, "name", k)}*"],
+      [for k, v in module.secrets.secrets : "arn:aws:secretsmanager:${data.aws_region.secondary.region}:${data.aws_caller_identity.current.account_id}:secret:${lookup(v, "name", k)}*"]
     )
   }
 }

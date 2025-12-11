@@ -9,11 +9,11 @@ module "primary" {
 
   nlbs = local.nlbs
 
-  dynamodb_table_name = aws_dynamodb_table.dynamodb_table.id
+  dynamodb_table_name = can(var.existing_dynamodb_tables.primary.name) ? var.existing_dynamodb_tables.primary.name : aws_dynamodb_table.dynamodb_table[0].id
 
   iam_instance_profile_arn = aws_iam_instance_profile.vault.arn
 
-  vault_kms_seal_key_id = aws_kms_key.seal.key_id
+  vault_kms_seal_key_id = var.existing_kms_seal_key_id == "" ? aws_kms_key.seal[0].key_id : data.aws_kms_key.existing_kms_seal_key_id[0].id
 
 
   ami_owners     = var.ami_owners
@@ -50,11 +50,11 @@ module "secondary" {
 
   nlbs = local.nlbs_secondary
 
-  dynamodb_table_name = aws_dynamodb_table.dynamodb_table.id
+  dynamodb_table_name = can(var.existing_dynamodb_tables.secondary.name) ? var.existing_dynamodb_tables.secondary.name : aws_dynamodb_table.dynamodb_table[0].id
 
   iam_instance_profile_arn = aws_iam_instance_profile.vault.arn
 
-  vault_kms_seal_key_id = aws_kms_key.seal.key_id
+  vault_kms_seal_key_id = var.existing_kms_seal_key_id == "" ? aws_kms_key.seal[0].key_id : data.aws_kms_key.existing_kms_seal_key_id[0].id
 
   ami_owners     = var.ami_owners
   ami_name_regex = var.ami_name_regex
