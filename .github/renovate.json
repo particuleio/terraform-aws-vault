@@ -4,44 +4,65 @@
     ":ignoreUnstable",
     ":prImmediately",
     ":updateNotScheduled",
-    ":automergeDisabled",
     ":disableRateLimiting",
     ":ignoreModulesAndTests",
-    ":autodetectPinVersions",
     ":gitSignOff",
     "group:monorepos",
     "group:recommended",
     "helpers:disableTypesNodeMajor",
     "workarounds:all",
     ":automergeDigest",
-    ":automergePatch",
-    ":automergeMinor"
+    ":automergeMinor",
+    ":dependencyDashboard"
   ],
-  "baseBranches": ["main"],
-  "enabledManagers": ["github-actions", "pre-commit", "terraform"],
+  "baseBranchPatterns": [
+    "main"
+  ],
+  "enabledManagers": [
+    "github-actions",
+    "pre-commit",
+    "terraform"
+  ],
   "semanticCommits": "enabled",
-  "automergeType": "pr-comment",
-  "automergeComment": "renovate:merge",
-  "reviewers": [
-    "team:team"
-  ],
+  "platformAutomerge": false,
+  "commitMessageExtra": "to {{newVersion}} (was {{currentVersion}})",
   "prHourlyLimit": 0,
   "packageRules": [
-      {
-        "matchManagers": ["github-actions"],
-        "semanticCommitScope": "ci",
-        "semanticCommitType": "chore"
-      },
-      {
-        "matchManagers": ["pre-commit"],
-        "semanticCommitScope": "ci",
-        "semanticCommitType": "chore"
-      },
-      {
-        "matchManagers": ["terraform"],
-        "semanticCommitScope": "tf",
-        "semanticCommitType": "feat",
-        "automerge": false
-      }
-    ]
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "semanticCommitScope": "ci",
+      "semanticCommitType": "chore"
+    },
+    {
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "semanticCommitScope": "ci",
+      "semanticCommitType": "chore"
+    },
+    {
+      "matchManagers": [
+        "github-actions",
+        "pre-commit"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "addLabels": [
+        "automerge"
+      ]
+    },
+    {
+      "matchManagers": [
+        "terraform"
+      ],
+      "semanticCommitScope": "tf",
+      "semanticCommitType": "feat",
+      "automerge": false
+    }
+  ]
 }
