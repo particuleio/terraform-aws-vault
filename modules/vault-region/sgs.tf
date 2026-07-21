@@ -1,6 +1,6 @@
 module "sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
   name    = var.name_prefix
   vpc_id  = var.vpc_id
 
