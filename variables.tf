@@ -168,6 +168,18 @@ variable "vpc_secondary_id" {
   description = "The ID of the VPC to use"
 }
 
+variable "sg_egress_ipv4_cidrs" {
+  type = list(string)
+  default = [ "0.0.0.0/0" ]
+  description = "IPv4 CIDRs to allow egress traffic to from Vault instances"
+}
+
+variable "sg_egress_ipv6_cidrs" {
+  type = list(string)
+  default = [ "::/0" ]
+  description = "IPv6 CIDRs to allow egress traffic to from Vault instances"
+}
+
 #############################
 ### EC2 #####################
 #############################

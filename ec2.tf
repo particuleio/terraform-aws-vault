@@ -33,6 +33,9 @@ module "primary" {
   vault_prometheus_retention_time          = var.vault_prometheus_retention_time
   vault_tls_min_version                    = var.vault_tls_min_version
 
+  sg_egress_ipv4_cidrs = var.sg_egress_ipv4_cidrs
+  sg_egress_ipv6_cidrs = var.sg_egress_ipv6_cidrs
+
   tags = var.tags
 }
 
@@ -72,6 +75,9 @@ module "secondary" {
   vault_default_lease_ttl                  = var.vault_default_lease_ttl
   vault_prometheus_retention_time          = var.vault_prometheus_retention_time
   vault_tls_min_version                    = var.vault_tls_min_version
+
+  sg_egress_ipv4_cidrs = var.sg_egress_ipv4_cidrs
+  sg_egress_ipv6_cidrs = var.sg_egress_ipv6_cidrs
 
   tags = var.tags
 }
