@@ -46,20 +46,20 @@ module "sg" {
     },
   ]
   egress_with_cidr_blocks = [
-    {
+    for _, cidr in var.sg_egress_ipv4_cidrs : {
       from_port   = 0
       to_port     = 0
       protocol    = "-1"
-      cidr_blocks = "0.0.0.0/0"
-    },
+      cidr_blocks = cidr
+    }
   ]
   egress_with_ipv6_cidr_blocks = [
-    {
+    for _, cidr in var.sg_egress_ipv6_cidrs : {
       from_port        = 0
       to_port          = 0
       protocol         = "-1"
-      ipv6_cidr_blocks = "::/0"
-    },
+      ipv6_cidr_blocks = cidr
+    }
   ]
 
 }
