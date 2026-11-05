@@ -45,22 +45,6 @@ module "sg" {
       ipv6_cidr_blocks = data.aws_vpc.vpc.ipv6_cidr_block
     },
   ]
-  egress_with_cidr_blocks = [
-    for _, cidr in var.sg_egress_ipv4_cidrs : {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = cidr
-    }
-  ]
-  egress_with_ipv6_cidr_blocks = [
-    for _, cidr in var.sg_egress_ipv6_cidrs : {
-      from_port        = 0
-      to_port          = 0
-      protocol         = "-1"
-      ipv6_cidr_blocks = cidr
-    }
-  ]
   # DynamoDB gateway endpoint (storage backend) routes to public IPs, not covered by the CIDR rules
   egress_with_prefix_list_ids = [
     {
@@ -72,4 +56,19 @@ module "sg" {
     },
   ]
 
+}
+
+# Outside the module (which uses count) so rules are keyed by CIDR and adding/removing one doesn't recreate the others
+resource "aws_vpc_security_group_egress_rule" "ipv4" {
+  for_each          = toset(var.sg_egress_ipv4_cidrs)
+  security_group_id = module.sg.security_group_id
+  ip_protocol       = "-1"
+  cidr_ipv4         = each.value
+}
+
+resource "aws_vpc_security_group_egress_rule" "ipv6" {
+  for_each          = toset(var.sg_egress_ipv6_cidrs)
+  security_group_id = module.sg.security_group_id
+  ip_protocol       = "-1"
+  cidr_ipv6         = each.value
 }
