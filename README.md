@@ -71,21 +71,21 @@ Instances have SSM enable by default, no need for SSH keys.
 ## Requirements
 
 | Name | Version |
-| ---- | ------- |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
 
 ## Providers
 
 | Name | Version |
-| ---- | ------- |
+|------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 | <a name="provider_aws.secondary"></a> [aws.secondary](#provider\_aws.secondary) | >= 5.0 |
 
 ## Modules
 
 | Name | Source | Version |
-| ---- | ------ | ------- |
+|------|--------|---------|
 | <a name="module_pki"></a> [pki](#module\_pki) | particuleio/pki/tls | ~> 2.0 |
 | <a name="module_primary"></a> [primary](#module\_primary) | ./modules/vault-region | n/a |
 | <a name="module_secondary"></a> [secondary](#module\_secondary) | ./modules/vault-region | n/a |
@@ -94,7 +94,7 @@ Instances have SSM enable by default, no need for SSH keys.
 ## Resources
 
 | Name | Type |
-| ---- | ---- |
+|------|------|
 | [aws_dynamodb_table.dynamodb_table](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table) | resource |
 | [aws_iam_instance_profile.vault](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
 | [aws_iam_policy.vault](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
@@ -140,7 +140,7 @@ Instances have SSM enable by default, no need for SSH keys.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-| ---- | ----------- | ---- | ------- | :------: |
+|------|-------------|------|---------|:--------:|
 | <a name="input_ami_name_regex"></a> [ami\_name\_regex](#input\_ami\_name\_regex) | n/a | `string` | `null` | no |
 | <a name="input_ami_owners"></a> [ami\_owners](#input\_ami\_owners) | n/a | `list(string)` | <pre>[<br/>  "886701765425"<br/>]</pre> | no |
 | <a name="input_asg"></a> [asg](#input\_asg) | n/a | `any` | n/a | yes |
@@ -155,6 +155,8 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_nlbs_secondary"></a> [nlbs\_secondary](#input\_nlbs\_secondary) | n/a | `any` | <pre>{<br/>  "external": {},<br/>  "internal": {<br/>    "internal": true<br/>  }<br/>}</pre> | no |
 | <a name="input_route53_private_zone_name"></a> [route53\_private\_zone\_name](#input\_route53\_private\_zone\_name) | n/a | `string` | `""` | no |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | n/a | `string` | `""` | no |
+| <a name="input_sg_egress_ipv4_cidrs"></a> [sg\_egress\_ipv4\_cidrs](#input\_sg\_egress\_ipv4\_cidrs) | IPv4 CIDRs to allow egress traffic to from Vault instances | `list(string)` | <pre>[<br/>  "0.0.0.0/0"<br/>]</pre> | no |
+| <a name="input_sg_egress_ipv6_cidrs"></a> [sg\_egress\_ipv6\_cidrs](#input\_sg\_egress\_ipv6\_cidrs) | IPv6 CIDRs to allow egress traffic to from Vault instances | `list(string)` | <pre>[<br/>  "::/0"<br/>]</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
 | <a name="input_vault_additional_config"></a> [vault\_additional\_config](#input\_vault\_additional\_config) | Additional content to include in the vault configuration file | `string` | `""` | no |
 | <a name="input_vault_additional_userdata"></a> [vault\_additional\_userdata](#input\_vault\_additional\_userdata) | Additional content to include in the cloud-init userdata for the EC2 instances | `string` | `""` | no |
@@ -178,7 +180,7 @@ Instances have SSM enable by default, no need for SSH keys.
 ## Outputs
 
 | Name | Description |
-| ---- | ----------- |
+|------|-------------|
 | <a name="output_dynamodb"></a> [dynamodb](#output\_dynamodb) | n/a |
 | <a name="output_primary"></a> [primary](#output\_primary) | n/a |
 | <a name="output_secondary"></a> [secondary](#output\_secondary) | n/a |
