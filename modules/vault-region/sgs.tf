@@ -61,5 +61,15 @@ module "sg" {
       ipv6_cidr_blocks = cidr
     }
   ]
+  # DynamoDB gateway endpoint (storage backend) routes to public IPs, not covered by the CIDR rules
+  egress_with_prefix_list_ids = [
+    {
+      description     = "DynamoDB"
+      from_port       = 443
+      to_port         = 443
+      protocol        = "tcp"
+      prefix_list_ids = data.aws_prefix_list.dynamodb.id
+    },
+  ]
 
 }
