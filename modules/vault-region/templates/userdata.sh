@@ -17,11 +17,13 @@ INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/
 # Set the Hostname
 hostnamectl set-hostname "${ name_prefix }-$INSTANCE_ID"
 
-# Download cfssl
-curl -sL https://github.com/cloudflare/cfssl/releases/download/v${ cfssl_version }/cfssl_${ cfssl_version }_linux_amd64 -o $BIN_DIR/cfssl
-curl -sL https://github.com/cloudflare/cfssl/releases/download/v${ cfssl_version }/cfssljson_${ cfssl_version }_linux_amd64 -o $BIN_DIR/cfssljson
-chmod +x $BIN_DIR/cfssl
-chmod +x $BIN_DIR/cfssljson
+# Download cfssl, unless already provided (e.g. baked in the AMI)
+for bin in cfssl cfssljson; do
+  if ! command -v $bin >/dev/null && [ ! -x $BIN_DIR/$bin ]; then
+    curl -sfL https://github.com/cloudflare/cfssl/releases/download/v${ cfssl_version }/$${bin}_${ cfssl_version }_linux_amd64 -o $BIN_DIR/$bin
+    chmod +x $BIN_DIR/$bin
+  fi
+done
 
 # Get Metadata
 MYIP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/local-ipv4)
