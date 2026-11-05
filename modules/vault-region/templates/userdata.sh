@@ -114,9 +114,9 @@ cat <<EOF > ${ vault_cert_dir }/cert.json
 EOF
 
 # Get CA and generate cert
-aws --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_pem --query SecretString --output text > ${ vault_cert_dir }/ca.crt
+aws --cli-connect-timeout 10 --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_pem --query SecretString --output text > ${ vault_cert_dir }/ca.crt
 
-aws --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_key --query SecretString --output text > ${ vault_cert_dir }/ca.key
+aws --cli-connect-timeout 10 --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_key --query SecretString --output text > ${ vault_cert_dir }/ca.key
 
 cd ${ vault_cert_dir }
 $BIN_DIR/cfssl gencert -ca ca.crt -ca-key ca.key -config cfssl-config.json -profile=default cert.json | $BIN_DIR/cfssljson -bare cert
