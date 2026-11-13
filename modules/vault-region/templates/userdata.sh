@@ -17,11 +17,13 @@ INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/
 # Set the Hostname
 hostnamectl set-hostname "${ name_prefix }-$INSTANCE_ID"
 
-# Download cfssl
-curl -sL https://github.com/cloudflare/cfssl/releases/download/v${ cfssl_version }/cfssl_${ cfssl_version }_linux_amd64 -o $BIN_DIR/cfssl
-curl -sL https://github.com/cloudflare/cfssl/releases/download/v${ cfssl_version }/cfssljson_${ cfssl_version }_linux_amd64 -o $BIN_DIR/cfssljson
-chmod +x $BIN_DIR/cfssl
-chmod +x $BIN_DIR/cfssljson
+# Download cfssl, unless already provided (e.g. baked in the AMI)
+for bin in cfssl cfssljson; do
+  if ! command -v $bin >/dev/null && [ ! -x $BIN_DIR/$bin ]; then
+    curl -sfL https://github.com/cloudflare/cfssl/releases/download/v${ cfssl_version }/$${bin}_${ cfssl_version }_linux_amd64 -o $BIN_DIR/$bin
+    chmod +x $BIN_DIR/$bin
+  fi
+done
 
 # Get Metadata
 MYIP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/local-ipv4)
@@ -112,9 +114,9 @@ cat <<EOF > ${ vault_cert_dir }/cert.json
 EOF
 
 # Get CA and generate cert
-aws --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_pem --query SecretString --output text > ${ vault_cert_dir }/ca.crt
+aws --cli-connect-timeout 10 --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_pem --query SecretString --output text > ${ vault_cert_dir }/ca.crt
 
-aws --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_key --query SecretString --output text > ${ vault_cert_dir }/ca.key
+aws --cli-connect-timeout 10 --region ${ region } secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:${region}:${account_id}:secret:${name_prefix}/tls/ca_key --query SecretString --output text > ${ vault_cert_dir }/ca.key
 
 cd ${ vault_cert_dir }
 $BIN_DIR/cfssl gencert -ca ca.crt -ca-key ca.key -config cfssl-config.json -profile=default cert.json | $BIN_DIR/cfssljson -bare cert

@@ -22,6 +22,10 @@ data "aws_ami" "vault" {
   }
 }
 
+data "aws_prefix_list" "dynamodb" {
+  name = "com.amazonaws.${data.aws_region.current.region}.dynamodb"
+}
+
 data "cloudinit_config" "userdata" {
 
   base64_encode = true

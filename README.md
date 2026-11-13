@@ -155,6 +155,8 @@ Instances have SSM enable by default, no need for SSH keys.
 | <a name="input_nlbs_secondary"></a> [nlbs\_secondary](#input\_nlbs\_secondary) | n/a | `any` | <pre>{<br/>  "external": {},<br/>  "internal": {<br/>    "internal": true<br/>  }<br/>}</pre> | no |
 | <a name="input_route53_private_zone_name"></a> [route53\_private\_zone\_name](#input\_route53\_private\_zone\_name) | n/a | `string` | `""` | no |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | n/a | `string` | `""` | no |
+| <a name="input_sg_egress_ipv4_cidrs"></a> [sg\_egress\_ipv4\_cidrs](#input\_sg\_egress\_ipv4\_cidrs) | IPv4 CIDRs to allow egress traffic to from Vault instances | `list(string)` | <pre>[<br/>  "0.0.0.0/0"<br/>]</pre> | no |
+| <a name="input_sg_egress_ipv6_cidrs"></a> [sg\_egress\_ipv6\_cidrs](#input\_sg\_egress\_ipv6\_cidrs) | IPv6 CIDRs to allow egress traffic to from Vault instances | `list(string)` | <pre>[<br/>  "::/0"<br/>]</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
 | <a name="input_vault_additional_config"></a> [vault\_additional\_config](#input\_vault\_additional\_config) | Additional content to include in the vault configuration file | `string` | `""` | no |
 | <a name="input_vault_additional_userdata"></a> [vault\_additional\_userdata](#input\_vault\_additional\_userdata) | Additional content to include in the cloud-init userdata for the EC2 instances | `string` | `""` | no |
